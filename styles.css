@@ -15,3 +15,7 @@ body.editing #home{visibility:hidden}
 /* Shared reference-space padding: 24 px top/sides; 10 px above actions. */
 .wallpaper-copy{inset:7.01754cqw 7.01754cqw 21.05263cqw;max-height:none;display:flex;flex-direction:column;justify-content:center;overflow:hidden}.quote,.source{flex-shrink:0}
 .entry>svg{width:39px;height:39px;flex-shrink:0}
+
+.fit-measure{position:fixed;left:-10000px;top:0;width:342px;visibility:hidden;pointer-events:none;contain:layout style}.demo-email{font-size:14px;overflow-wrap:anywhere;margin:0 0 24px;color:var(--secondary)}.entry{font-size:clamp(12px,3.8vw,16px);overflow-wrap:anywhere}.entry>span:last-child{max-width:100%;line-height:20px}.category{max-width:100%;white-space:nowrap}.settings-row>span{min-width:0;overflow-wrap:anywhere}
+
+.language-check{visibility:hidden}.settings-row[aria-pressed=true] .language-check{visibility:visible}

@@ -164,3 +164,13 @@ The user supplied an updated HTML containing 12 dark backgrounds to replace the 
 The user authorizes Settings implementation. Reuse existing ivory surfaces, thin dividers, serif titles and sans-serif operational labels. Favorites restore or remove full locally stored designs. Feedback copy must never imply submission. Language range, feedback destination and privacy/version copy await user replies; current placeholders are not completed features.
 
 The latest annotated screenshot specifies 24 px top/left/right in the reference wallpaper and at least 10 px between attribution and action buttons. Scale that shared reference composition for mini/favorite previews. Overflow behavior (input limit versus font fitting) requires user confirmation before adopting a new rule.
+
+
+## Confirmed settings and text-limit decisions (2026-10-21)
+
+- Available interface languages: English (default), Traditional Chinese, French, German, Italian, Dutch, Korean and Japanese. Save the preference locally; switching interface language must preserve wallpaper content and favorite designs.
+- Feedback uses the explicitly fictitious address feedback@motivation.example. Label it as a demo placeholder without a receiving inbox. Support copying the typed message; never report delivery.
+- Version is Demo 0.1. Privacy copy describes browser-local draft/favorites/language storage, no account sync, local bundled imagery and AI-written content, clipboard-only feedback, and GitHub Pages as the host. It is a demo notice to update before adding other collection.
+- Keep wallpaper typography fixed. Stop input when its rendered quote plus attribution would exceed the 24 px top/side bounds and the 10 px separation above actions. Limit by measured layout, not an arbitrary universal character count: letters, languages and newlines occupy different space.
+- Long paste inserts only a fitting portion, preserving existing surrounding text. Composition input is evaluated on commit, and grapheme segmentation avoids splitting emoji. Source edits share the same layout budget. Previously oversized stored text is fitted when restored, with feedback.
+- The main, mini and favorite previews share reference-space layout; the offscreen measurement reference uses the same fonts and dimensions. No scrollable wallpaper text or auto-shrinking is used.

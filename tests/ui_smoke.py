@@ -85,7 +85,7 @@ with sync_playwright() as p:
  assert page.locator('.ideas-label').count()==0
  page.screenshot(path='/tmp/motivation-review/empty-type.png')
  # Background geometry must remain aligned even inside the centered preview button.
- for wallpaper in page.locator('.wallpaper').all():
+ for wallpaper in page.locator('.wallpaper:not(.fit-measure)').all():
   rect=wallpaper.bounding_box();img=wallpaper.locator('img').bounding_box()
   if rect and img:
    assert abs(rect['x']-img['x'])<1 and abs(rect['y']-img['y'])<1

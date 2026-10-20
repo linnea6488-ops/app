@@ -16,8 +16,10 @@ wallpaper favorites are stored on this device, scoped to the browser origin.
 
 The current implementation covers home and Image / Type / Ideas editing.
 Settings navigation, local favorite restore/removal and feedback copying are available.
-Additional language choices, the feedback destination, privacy/version copy and
-long-quote overflow policy are pending user confirmation. Live AI generation
+Eight interface languages are available with a persisted preference. The demo
+feedback address is explicitly fictitious; messages can be copied, not sent.
+Demo 0.1 includes a factual privacy notice. Quote/source input is bounded by
+actual fixed-size layout, including pasted text and IME composition. Live AI generation
 and image export/share are not implemented.
 Their controls do not report successful operations. Export ratio remains deferred.
 The demo includes 12 AI-written original English quotes and 12 user-supplied dark
@@ -34,6 +36,7 @@ Chromium at `/usr/bin/chromium` (both available in the current cloud environment
 
 ```sh
 python3 tests/ui_smoke.py
+python3 tests/settings_limits_smoke.py
 ```
 
 This checks actual browser rendering, responsive overflow, editing, local state,

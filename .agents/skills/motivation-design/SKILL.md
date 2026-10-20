@@ -24,8 +24,8 @@ The latest explicit user instructions take precedence. If requirements change, u
 - Ideas combine a built-in library with real AI generation. Applying an idea changes quote and source only.
 - Favorites store the complete wallpaper locally. Auto-save the current design on this device. No login, cross-device sync, subscriptions, undo/redo or separate editable-works library.
 - Save exports a high-resolution image; Share shares the image. Final export ratio and resolution are explicitly deferred. Do not silently decide them.
-- Menu scope is Language, Favorites, Feedback, version information and Privacy Policy. Omit the deferred “用户didi” item. Additional languages, feedback destination and legal text are not yet supplied.
-- Settings pages are now explicitly authorized. Reuse the established visual system; language options, feedback destination, privacy/version copy and quote overflow handling require the pending user answers.
+- Menu scope is Language, Favorites, Feedback, version information and Privacy Policy. Omit the deferred “用户didi” item. Eight interface languages, a clearly marked fictitious feedback address and demo privacy text are now confirmed; see the latest reference.
+- Settings pages are now explicitly authorized. Reuse the established visual system; use the latest confirmed eight-language options, placeholder-only feedback address, Demo 0.1 privacy notice and fixed-size input limits in the reference.
 
 ## Workflow
 
