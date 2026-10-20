@@ -32,7 +32,7 @@ The latest explicit user instructions take precedence. If requirements change, u
 1. Inspect the current repository, changes and requested scope. Read the reference and current project status. Preserve unrelated work and existing Skills.
 2. Reuse the original palette, type roles and component geometry. Replace rigid viewport coordinates with responsive layout while preserving the reference composition.
 3. For a visual specification request, build a browser-viewable component showcase using actual HTML/CSS components. Show named variants and interactive states, rather than only writing prose or generating a static picture. Keep showcase labels in English. Do not invent new app pages to fill the showcase.
-4. Include default, selected, pressed, focus, loading, empty and error states where relevant. Include the lighter empty-field placeholders, real text values at normal contrast, optional attribution, and long-content cases.
+4. Include default, selected, pressed, focus, loading, empty and error states where relevant. Include the lighter empty-field placeholders, real text values in their specified colors, optional attribution, and long-content cases.
 5. Implement only authorized behaviors. Sheet dragging needs a click/keyboard alternative, scrolling must not drag the sheet accidentally, and the exposed preview closes the editor. Preserve edits across panel switches.
 6. Use one composition model for main preview, mini preview, favorites and eventual export. Attribution follows the quote; long text must not overlap. Placeholders never become wallpaper text.
 7. Validate the actual rendered UI when browser tools are available. Test 320, 375, 390 and 430 px widths, keyboard focus, minimum 44 px touch targets, long quotes and reduced motion. If visual tools are unavailable, state that limitation; do not claim visual validation from code inspection alone.
@@ -45,8 +45,10 @@ The latest explicit user instructions take precedence. If requirements change, u
 - Amiri for brand, quote and literary labels; system sans for fields and operational copy.
 - Reference width 390 px with 24 px gutters; 16 px gutters may be used at narrow widths.
 - Main Save button 56 px high; circular actions 44 px; component radius 4 px.
-- Empty Quote: “Write your own words…”; empty Source: “Add an author or source (optional)”.
+- Empty Quote: “Please enter what you want to describe.” (placeholder and entered quote text #C4BFBA); empty Source: “Add an author or source (optional)”.
 - Selected dark thumbnails need a clear outline/check; dark artwork needs readable light quote and source text.
 - English toasts must describe an operation that actually happened. A toast alone does not implement save, share, feedback or AI generation.
 
 See the reference for complete tokens, measurements, component contracts and acceptance checks. No external messaging, publishing or deployment is authorized merely by applying this skill.
+
+User-confirmed UI revision: no simulated iOS status-area spacer, no visible sheet close icon, and no “Original words · AI-created” heading. See the latest reference section for screenshot geometry and input color. Keep icon replacements pending until the user supplies them.

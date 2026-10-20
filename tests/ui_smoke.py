@@ -13,10 +13,11 @@ with sync_playwright() as p:
   page.set_viewport_size({'width':width,'height':844})
   assert page.evaluate('document.documentElement.scrollWidth <= innerWidth'),width
   page.get_by_role('button',name='Typography',exact=True).click()
-  assert page.locator('#quote-input').get_attribute('placeholder')=='Write your own words…'
+  assert page.locator('#quote-input').get_attribute('placeholder')=='Please enter what you want to describe.'
   assert page.evaluate('document.documentElement.scrollWidth <= innerWidth'),width
-  page.get_by_role('button',name='Close editor',exact=True).click()
+  page.get_by_role('button',name='Close editor and return home',exact=True).click()
  page.set_viewport_size({'width':390,'height':844})
+ assert page.locator('.app').evaluate('(el)=>parseFloat(getComputedStyle(el).paddingTop)')==0
  page.screenshot(path='/tmp/motivation-review/home.png',full_page=True)
  page.get_by_role('button',name='Typography',exact=True).click()
  quote='A quieter mind makes room for possibility.\nLet your words find their way, one gentle line at a time.'
@@ -59,6 +60,13 @@ with sync_playwright() as p:
  assert handle.get_attribute('aria-expanded')=='true'
  page.get_by_role('tab',name='Image',exact=True).click()
  assert handle.get_attribute('aria-expanded')=='true'
+ page.wait_for_timeout(300)
+ assert abs(page.locator('#sheet').bounding_box()['y']-20)<1
+ page.screenshot(path='/tmp/motivation-review/image-expanded.png')
+ tabs_before=page.locator('.tabs').bounding_box()
+ page.locator('#sheet-content').evaluate('(el)=>el.scrollTop=78')
+ page.screenshot(path='/tmp/motivation-review/image-scrolled.png')
+ assert page.locator('.tabs').bounding_box()['y']==tabs_before['y']
  page.locator('#sheet-content').evaluate('(el)=>el.scrollTop=250')
  assert handle.get_attribute('aria-expanded')=='true'
  # Verify keyboard trap at both edges.
@@ -71,6 +79,10 @@ with sync_playwright() as p:
  # Clear both fields and verify placeholders stay out of preview.
  page.locator('[data-open="type"]').click();page.locator('#quote-input').fill('');page.locator('#source-input').fill('')
  assert page.locator('#home .quote').inner_text()==''
+ assert page.locator('#quote-input').evaluate('(el)=>getComputedStyle(el).color')=='rgb(196, 191, 186)'
+ assert page.locator('#quote-input').evaluate('(el)=>getComputedStyle(el, "::placeholder").color')=='rgb(196, 191, 186)'
+ assert page.locator('#close-editor').count()==0
+ assert page.locator('.ideas-label').count()==0
  page.screenshot(path='/tmp/motivation-review/empty-type.png')
  # Background geometry must remain aligned even inside the centered preview button.
  for wallpaper in page.locator('.wallpaper').all():
@@ -91,5 +103,5 @@ with sync_playwright() as p:
  assert denied.locator('#storage-error').is_visible()
  assert 'couldn’t be saved' in denied.locator('#toast').inner_text()
  denied.close()
- print(json.dumps({'result':'passed','widths':[320,375,390,430],'checks':['layout overflow','placeholder copy','long quote attribution','reload persistence','full-design favorite persistence','background selection','idea filtering and retained layout','populated AI quote categories','pointer drag','tab snap preservation','focus return and trap','truthful export status','empty preview','background geometry','downward dismiss','storage failure rollback'],'pageErrors':errors}))
+ print(json.dumps({'result':'passed','widths':[320,375,390,430],'checks':['layout overflow','placeholder copy','long quote attribution','reload persistence','full-design favorite persistence','background selection','idea filtering and retained layout','populated AI quote categories','pointer drag','tab snap preservation','focus return and trap','truthful export status','empty preview','background geometry','downward dismiss','storage failure rollback','no simulated status gap','expanded sheet top','sticky tabs','specified placeholder and entered text color','no close icon or AI heading'],'pageErrors':errors}))
  browser.close()

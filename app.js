@@ -40,10 +40,10 @@
     if (focus) $('#tab-'+tab).focus();
   }
   function setExpanded(value) { expanded=value; sheet.style.height=''; sheet.classList.toggle('expanded',value); $('#handle').setAttribute('aria-expanded',String(value)); $('#handle').setAttribute('aria-label',value ? 'Collapse editor' : 'Expand editor'); }
-  function close() { if (editor.hidden) return; editor.hidden=true; $('#home').inert=false; $('.header').inert=false; document.body.style.overflow=''; persist(); returnFocus?.focus(); }
-  $$('[data-open]').forEach(el => el.addEventListener('click',() => { returnFocus=el; syncFields(); changeTab(el.dataset.open); setExpanded(false); editor.hidden=false; $('#home').inert=true; $('.header').inert=true; document.body.style.overflow='hidden'; $('#tab-'+el.dataset.open).focus(); }));
+  function close() { if (editor.hidden) return; editor.hidden=true; document.body.classList.remove('editing'); $('#home').inert=false; $('.header').inert=false; document.body.style.overflow=''; persist(); returnFocus?.focus(); }
+  $$('[data-open]').forEach(el => el.addEventListener('click',() => { returnFocus=el; syncFields(); changeTab(el.dataset.open); setExpanded(false); editor.hidden=false; document.body.classList.add('editing'); $('#home').inert=true; $('.header').inert=true; document.body.style.overflow='hidden'; $('#tab-'+el.dataset.open).focus(); }));
   $('#brand').addEventListener('click',() => window.scrollTo({top:0,behavior:'smooth'}));
-  $('#close-editor').addEventListener('click',close); $('#preview-close').addEventListener('click',close);
+  $('#preview-close').addEventListener('click',close);
   $('#menu').addEventListener('click',() => toast('Menu pages haven’t been added yet.'));
   $('#save').addEventListener('click',() => toast('Saving images isn’t enabled in this demo yet.'));
   $('#share').addEventListener('click',() => toast('System sharing isn’t enabled in this demo yet.'));
@@ -145,7 +145,7 @@
   $('#handle').addEventListener('pointerdown',event => { if (event.button!==0) return; suppressClick=false; drag={y:event.clientY,height:sheet.getBoundingClientRect().height,expanded}; event.currentTarget.setPointerCapture(event.pointerId); });
   $('#handle').addEventListener('pointermove',event => {
     if (!drag) return; const dy=event.clientY-drag.y;
-    if (Math.abs(dy)>8) { suppressClick=true; sheet.classList.add('dragging'); const max=editor.clientHeight-74; sheet.style.height=Math.max(120,Math.min(max,drag.height-dy))+'px'; }
+    if (Math.abs(dy)>8) { suppressClick=true; sheet.classList.add('dragging'); const max=editor.clientHeight-parseFloat(getComputedStyle($('.app')).paddingTop)-20; sheet.style.height=Math.max(120,Math.min(max,drag.height-dy))+'px'; }
   });
   $('#handle').addEventListener('pointerup',event => {
     if (!drag) return; const dy=event.clientY-drag.y, wasExpanded=drag.expanded; drag=null; sheet.classList.remove('dragging');

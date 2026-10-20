@@ -17,7 +17,7 @@ This phase specifies existing components only. Menu destinations and other pages
 | surface/category | #F7F1EA | Unselected category chips |
 | ink/primary | #1A1918 | Main text, primary buttons, selected borders |
 | ink/secondary | #625F5D | Secondary text |
-| ink/placeholder | #827B74 | Proposed lighter placeholder; verify contrast on composited input surface |
+| ink/quote-input | #C4BFBA | User-specified quote placeholder and entered text color |
 | border/default | #E6E0DA | Dividers and component boundaries |
 | border/focus | #625F5D | Proposed visible keyboard focus outline |
 | handle | #C4BFBA | Sheet grabber |
@@ -67,11 +67,11 @@ The mini preview must render the same composition, typography and crop at approx
 | Circular action | 44 × 44 px, ivory fill, 28 px icon box | Default, pressed, focus, selected (bookmark), busy (share). Accessible labels “Add to favorites” / “Remove from favorites”, “Share wallpaper”. Toggle updates persistent full-wallpaper snapshot. |
 | Feature entry | Three equal bordered tiles, icon/thumbnail, serif label | “Background”, “Typography”, “Inspiration”. Default, pressed, focus. Background thumbnail follows selection. Each opens corresponding sheet tab. |
 | Primary button | Full content width, 56 px height, 4 px radius | “Save”; busy “Exporting…”; error with retry. Disable duplicate exports during processing. Successful export must precede success feedback. |
-| Editor sheet | Ivory surface, grabber, tab header, scrolling body | Standard and expanded positions; preserve y346 and y74 on reference artboard. Adaptive positions must leave an operable close path. Header stays fixed while content scrolls. |
+| Editor sheet | Ivory surface, grabber, tab header, scrolling body | Standard and expanded positions; Standard height remains 59% of viewport; expanded top is 20 px plus actual safe-area inset after removing the simulated 54 px iOS status area. Adaptive positions must leave an operable close path. Header stays fixed while content scrolls. |
 | Sheet grabber | 46 × 4 px visible line | At least 44 px high target, click and keyboard toggle as drag alternative. Accessible label “Expand editor” / “Collapse editor”. |
 | Editor tabs | Image / Type / Ideas; 48 px header; 48 × 4 px indicator | One selected tab; selection indicated by underline and aria-selected. Each full tab hit area at least 44 px high. Switching tabs preserves edits and sheet height. |
 | Background thumbnail | Three columns, 10 px gap, 107:190 reference ratio | Loading, ready, selected, failed. Selected has stable inset outline plus small check indicator so dark artwork cannot conceal state. Failure offers retry. Decorative artwork descriptions supplied as accessible names. No upload control. |
-| Text field | Label, bordered ivory-white surface, 16 px value, 18 px horizontal inset | Empty/placeholder, filled, focus, invalid. Quote minimum height 116 px; Source 68 px. Fields can grow or scroll without clipping. Values use primary ink, placeholders lighter; labels always remain visible. |
+| Text field | Label, bordered ivory-white surface, 16 px value, 18 px horizontal inset | Empty/placeholder, filled, focus, invalid. Quote minimum height 116 px; Source 68 px. Fields can grow or scroll without clipping. Quote placeholder and entered quote text both use #C4BFBA per explicit user instruction; source values retain primary ink. Labels remain visible. |
 | Alignment segmented control | 56 px height, three equal segments, selected inset surface | Left / Center / Right labels for assistive technology; selected state via aria-pressed or radio semantics. Changes update preview and local draft immediately. |
 | Category chip | 36 px visual height, 4 px radius, horizontal strip | Recommended / Philosophy / Motivation / Love / Family. 44 px interaction height, visible selected fill, focus. Real filtering; selection is not merely decorative. Preserve scroll position sensibly. |
 | Inspiration card | Two columns, 10 px gap, 18 px internal padding | Natural content height, quote, divider, source. Default, selected, focus. Never duplicate text to fill space. Selection changes quote and attribution only; background and alignment remain unchanged. |
@@ -82,7 +82,7 @@ The mini preview must render the same composition, typography and crop at approx
 | Element | English copy |
 | --- | --- |
 | Quote label | Quote |
-| Empty quote placeholder | Write your own words… |
+| Empty quote placeholder | Please enter what you want to describe. |
 | Source label | Source |
 | Empty source placeholder | Add an author or source (optional) |
 | Alignment label | Alignment |
@@ -92,11 +92,11 @@ The mini preview must render the same composition, typography and crop at approx
 | Share fallback | Sharing isn’t available here. Download your wallpaper instead. |
 | Persistence failure | Your changes couldn’t be saved on this device. |
 
-Placeholders appear only for empty fields. Existing quote text must stay editable at normal contrast; do not show a placeholder as real input or erase the current design just to reveal instructions. Do not block saving on an empty optional source.
+Placeholders appear only for empty fields. Existing quote text remains editable in the user-specified #C4BFBA; do not show a placeholder as real input or erase the current design just to reveal instructions. Do not block saving on an empty optional source.
 
 ### Sheet interaction contract
 
-Drag the handle/header using pointer capture, distinguish taps from drags, and snap to standard or expanded position. Downward drag from expanded collapses; downward drag from standard dismisses. Click the exposed preview to close. In expanded mode offer an accessible close action even if the preview is covered. Escape closes on desktop; focus returns to the initiating entry. Sheet focus must remain within active editor controls and its close action.
+Drag the handle/header using pointer capture, distinguish taps from drags, and snap to standard or expanded position. Downward drag from expanded collapses; downward drag from standard dismisses. Click the exposed preview to close. Do not display a close icon. Use handle collapse and downward dismissal; Escape remains available for keyboard users. Escape closes on desktop; focus returns to the initiating entry. Sheet focus must remain within the active editor controls and preview dismissal target.
 
 Scrolling content must not accidentally drag the sheet. Restrict direct dragging to header/handle in the initial implementation. Respect reduced-motion preferences; transitions otherwise use 180–240 ms and the existing ease curve. The software keyboard must not cover the focused input; allow content scrolling and keep edits when closing the sheet.
 
@@ -147,3 +147,13 @@ The user requests AI-created quote copy and background imagery. The current demo
 ## Latest background source update
 
 The user supplied an updated HTML containing 12 dark backgrounds to replace the separately generated set. Use all 12 supplied images in the active demo; stop further image generation unless requested. Retain AI-original English quote copy. This supersedes the previous three-image demo content choice.
+
+
+## Confirmed UI revision from user screenshots
+
+- Remove the artificial iOS status-bar space in the website: use only the actual browser safe-area inset, without an extra fixed top spacer. No fake clock, signal, battery or home indicator.
+- Expanded sheet reaches 20 px below the actual safe-area top (74 minus the original simulated 54 px status bar); the tab header remains fixed while artwork scrolls underneath. Keep the three-column gallery and existing artwork geometry.
+- Quote placeholder is exactly “Please enter what you want to describe.” Both placeholder and entered quote text use #C4BFBA, matching the user's two explicit color values. Source field styling is unchanged.
+- Remove the “Original words · AI-created” heading above inspiration cards. This does not change the source of generated content or authorize false author attributions.
+- Remove the visible sheet close icon. Preview click, handle toggle, downward drag and Escape remain.
+- Typography and Inspiration icon replacements are pending user-supplied assets; keep current icons until received. Preferred transparent SVG at 39 × 39 and 34 × 34 logical dimensions respectively, or 3× transparent PNG at 117 × 117 and 102 × 102.

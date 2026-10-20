@@ -140,3 +140,15 @@
 - 本轮源码将提交并推送至 main（以 Git 历史和远端实际结果为准）。
 - GitHub Pages 是否开启尚未确认。需在 https://github.com/linnea6488-ops/app/settings/pages 选择 Deploy from a branch → main → /(root)，保存后等待部署。
 - 以 Pages 设置显示的网址为准；没有验证之前不宣称在线 Demo 可访问。
+
+## 用户截图反馈调整（2026-10-20）
+
+- 移除网页顶部模拟状态栏空位，只保留真实 safe-area，不额外固定留白。
+- 面板上拉扩展至距顶部 20px + 真实 safe-area，图库滚动时标签栏保持固定；保留三列背景。
+- Quote 占位文本按用户原文改为 Please enter what you want to describe.，占位及输入值均用 #C4BFBA（用户两处写了同一色值，未擅自改色）。
+- 移除 Original words · AI-created 标题和可见关闭按钮；继续支持点击预览、拖动收起/关闭及 Escape。
+- 图标待用户提供，建议独立透明 SVG（Typography 39×39，Inspiration 34×34），或对应 3× PNG。现有图标尚未替换。
+- 已同步设计规范和 Skill，未修改原始上传文件。
+
+- 本轮已通过 Chromium 320/375/390/430px 检查；另验证展开面板 top=20、内容滚动时标签栏坐标固定、Quote 两种文字状态色值正确、关闭按钮及 AI 标题不存在。截图已刷新，原型不变。
+- 待用户在真实 iPhone Safari 复查。新图标收到前不替换。CSS/JS 引用已带本轮版本号，避免手机继续使用旧缓存。
