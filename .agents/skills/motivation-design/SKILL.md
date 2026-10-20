@@ -25,7 +25,7 @@ The latest explicit user instructions take precedence. If requirements change, u
 - Favorites store the complete wallpaper locally. Auto-save the current design on this device. No login, cross-device sync, subscriptions, undo/redo or separate editable-works library.
 - Save exports a high-resolution image; Share shares the image. Final export ratio and resolution are explicitly deferred. Do not silently decide them.
 - Menu scope is Language, Favorites, Feedback, version information and Privacy Policy. Omit the deferred “用户didi” item. Additional languages, feedback destination and legal text are not yet supplied.
-- Current sequencing: complete existing component specifications and visual review before implementing other pages. A component showcase can demonstrate the current system without expanding navigation scope.
+- Settings pages are now explicitly authorized. Reuse the established visual system; language options, feedback destination, privacy/version copy and quote overflow handling require the pending user answers.
 
 ## Workflow
 
@@ -52,3 +52,5 @@ The latest explicit user instructions take precedence. If requirements change, u
 See the reference for complete tokens, measurements, component contracts and acceptance checks. No external messaging, publishing or deployment is authorized merely by applying this skill.
 
 User-confirmed UI revision: no simulated iOS status-area spacer, no visible sheet close icon, and no “Original words · AI-created” heading. See the latest reference section for screenshot geometry and input color. Keep icon replacements pending until the user supplies them.
+
+Both replacement entry icons use the same 39×39 logical container, preserving the supplied internal whitespace. The latest reference supersedes the earlier different export sizes.

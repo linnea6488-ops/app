@@ -15,7 +15,10 @@ is needed. Background images and Amiri fonts are served locally. Drafts and full
 wallpaper favorites are stored on this device, scoped to the browser origin.
 
 The current implementation covers home and Image / Type / Ideas editing.
-Menu destination pages, AI generation and image export/share are not implemented.
+Settings navigation, local favorite restore/removal and feedback copying are available.
+Additional language choices, the feedback destination, privacy/version copy and
+long-quote overflow policy are pending user confirmation. Live AI generation
+and image export/share are not implemented.
 Their controls do not report successful operations. Export ratio remains deferred.
 The demo includes 12 AI-written original English quotes and 12 user-supplied dark
 backgrounds. The quote copy is pre-generated built-in content; no live AI endpoint is called.

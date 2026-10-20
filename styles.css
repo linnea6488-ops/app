@@ -9,3 +9,9 @@
 .wallpaper:after{content:"";position:absolute;inset:0;background:linear-gradient(transparent,rgba(0,0,0,.12),transparent);pointer-events:none}.wallpaper-copy{z-index:1}
 
 body.editing #home{visibility:hidden}
+
+/* Settings use the existing page surface, spacing, border and type roles. */
+.settings{min-height:70dvh}.page-heading{display:flex;align-items:center;gap:12px;margin:0 0 24px;min-height:52px}.page-heading h1{font:700 28px/36px var(--serif);margin:0}.back-button{min-width:44px;min-height:44px;font:32px/1 var(--sans);margin-left:-12px}.settings-list{border-top:1px solid var(--border)}.settings-row{display:flex;justify-content:space-between;align-items:center;gap:16px;width:100%;min-height:60px;padding:16px 0;border-bottom:1px solid var(--border);text-align:left;font-size:16px}.row-detail{display:flex;gap:12px;align-items:center;color:var(--secondary);font-size:14px}.version-row{cursor:default}.favorites-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 10px}.favorite-item{min-width:0}.favorite-restore{display:block;width:100%;padding:0;border-radius:4px}.favorite-remove{font-size:13px;min-height:44px;color:var(--secondary);text-decoration:underline;text-underline-offset:4px}.empty-state{padding:40px 0;text-align:center}.empty-state h2{font:700 24px/32px var(--serif);margin:0 0 12px}.empty-state p,.policy-copy p{font-size:14px;line-height:24px;color:var(--secondary);margin:0 0 24px}.empty-state .primary{margin-top:12px}.policy-copy h2{font:700 20px/28px var(--serif);margin:24px 0 12px}
+/* Shared reference-space padding: 24 px top/sides; 10 px above actions. */
+.wallpaper-copy{inset:7.01754cqw 7.01754cqw 21.05263cqw;max-height:none;display:flex;flex-direction:column;justify-content:center;overflow:hidden}.quote,.source{flex-shrink:0}
+.entry>svg{width:39px;height:39px;flex-shrink:0}

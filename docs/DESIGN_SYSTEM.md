@@ -156,4 +156,11 @@ The user supplied an updated HTML containing 12 dark backgrounds to replace the 
 - Quote placeholder is exactly “Please enter what you want to describe.” Both placeholder and entered quote text use #C4BFBA, matching the user's two explicit color values. Source field styling is unchanged.
 - Remove the “Original words · AI-created” heading above inspiration cards. This does not change the source of generated content or authorize false author attributions.
 - Remove the visible sheet close icon. Preview click, handle toggle, downward drag and Escape remain.
-- Typography and Inspiration icon replacements are pending user-supplied assets; keep current icons until received. Preferred transparent SVG at 39 × 39 and 34 × 34 logical dimensions respectively, or 3× transparent PNG at 117 × 117 and 102 × 102.
+- Typography and Inspiration icon replacements are pending user-supplied assets; keep current icons until received. Preferred transparent SVG with the same 39 × 39 logical canvas for both icons, or 3× transparent PNG at 117 × 117. Preserve internal whitespace; do not crop the supplied artwork.
+
+
+## Current settings and text-boundary work
+
+The user authorizes Settings implementation. Reuse existing ivory surfaces, thin dividers, serif titles and sans-serif operational labels. Favorites restore or remove full locally stored designs. Feedback copy must never imply submission. Language range, feedback destination and privacy/version copy await user replies; current placeholders are not completed features.
+
+The latest annotated screenshot specifies 24 px top/left/right in the reference wallpaper and at least 10 px between attribution and action buttons. Scale that shared reference composition for mini/favorite previews. Overflow behavior (input limit versus font fitting) requires user confirmation before adopting a new rule.

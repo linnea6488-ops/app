@@ -1,4 +1,4 @@
-from playwright.sync_api import sync_playwright
+from playwright.sync_api import sync_playwright, expect
 import json
 from pathlib import Path
 Path("/tmp/motivation-review").mkdir(exist_ok=True)
@@ -94,6 +94,39 @@ with sync_playwright() as p:
  box=page.locator('#handle').bounding_box();x=box['x']+65;y=box['y']+22
  page.mouse.move(x,y);page.mouse.down();page.mouse.move(x,y+100,steps=8);page.mouse.up()
  assert page.locator('#editor').is_hidden()
+ # Settings navigation, full-design favorites, language preference and truthful feedback.
+ page.locator('#menu').click()
+ page.locator('[data-settings="favorites"]').click()
+ expect(page.locator('.favorite-item')).to_have_count(1)
+ favorite_quote=page.locator('.favorite-item .quote').inner_text()
+ assert favorite_quote==quote
+ page.screenshot(path='/tmp/motivation-review/favorites.png')
+ page.locator('.favorite-restore').click()
+ assert page.locator('#home .quote').inner_text()==quote
+ assert page.locator('#editor').is_hidden()
+ page.locator('#menu').click()
+ page.screenshot(path='/tmp/motivation-review/settings.png')
+ page.locator('[data-settings="favorites"]').click()
+ page.locator('.favorite-remove').click()
+ assert page.locator('#favorites-empty').is_visible()
+ page.reload(wait_until='networkidle')
+ assert page.locator('#favorites-empty').is_visible()
+ page.locator('#detail-back').click()
+ page.locator('[data-settings="language"]').click()
+ page.locator('#english-language').click()
+ assert page.evaluate('localStorage.getItem("motivation.language")')=='en'
+ page.locator('#detail-back').click()
+ page.locator('[data-settings="feedback"]').click()
+ page.locator('#copy-feedback').click()
+ assert page.locator('#feedback-status').inner_text()=='Please enter your feedback first.'
+ page.locator('#feedback-input').fill('The panel could feel smoother.')
+ page.evaluate("Object.defineProperty(navigator, 'clipboard', {configurable:true, value:{writeText:()=>Promise.reject(new Error('denied'))}})")
+ page.locator('#copy-feedback').click()
+ assert 'manually' in page.locator('#feedback-status').inner_text()
+ page.locator('#detail-back').click()
+ page.locator('#settings-back').click()
+ expect(page.locator('#home')).to_be_visible()
+ assert not errors, errors
  # A denied storage write must not claim that a favorite was persisted.
  denied=browser.new_page(viewport={'width':390,'height':844})
  denied.add_init_script("Storage.prototype.setItem = function(){throw new DOMException('denied','SecurityError')}")
@@ -103,5 +136,5 @@ with sync_playwright() as p:
  assert denied.locator('#storage-error').is_visible()
  assert 'couldn’t be saved' in denied.locator('#toast').inner_text()
  denied.close()
- print(json.dumps({'result':'passed','widths':[320,375,390,430],'checks':['layout overflow','placeholder copy','long quote attribution','reload persistence','full-design favorite persistence','background selection','idea filtering and retained layout','populated AI quote categories','pointer drag','tab snap preservation','focus return and trap','truthful export status','empty preview','background geometry','downward dismiss','storage failure rollback','no simulated status gap','expanded sheet top','sticky tabs','specified placeholder and entered text color','no close icon or AI heading'],'pageErrors':errors}))
+ print(json.dumps({'result':'passed','widths':[320,375,390,430],'checks':['layout overflow','placeholder copy','long quote attribution','reload persistence','full-design favorite persistence','background selection','idea filtering and retained layout','populated AI quote categories','pointer drag','tab snap preservation','focus return and trap','truthful export status','empty preview','background geometry','downward dismiss','storage failure rollback','no simulated status gap','expanded sheet top','sticky tabs','specified placeholder and entered text color','no close icon or AI heading','settings navigation','favorite restore and removal','language preference','feedback failure handling'],'pageErrors':errors}))
  browser.close()

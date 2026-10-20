@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#F5EFE9"><title>Motivation</title><link rel="stylesheet" href="styles.css?v=20261020-2"><script src="app.js?v=20261020-2" defer></script></head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#F5EFE9"><title>Motivation</title><link rel="stylesheet" href="styles.css?v=20261021-1"><script src="app.js?v=20261021-1" defer></script></head>
 <body>
 <div class="app">
 <header class="header"><button class="brand" id="brand">Motivation</button><button class="icon-button menu" id="menu" aria-label="Open menu"><span></span><span></span><span></span></button></header>
@@ -19,6 +19,24 @@
 <button class="primary" id="save">Save</button>
 <p id="storage-error" class="error" role="status" hidden></p>
 </main>
+
+<section id="settings" class="settings" aria-labelledby="settings-title" hidden>
+  <header class="page-heading"><button type="button" class="back-button" id="settings-back" aria-label="Back to home">‹</button><h1 id="settings-title">Settings</h1></header>
+  <nav class="settings-list" aria-label="Settings">
+    <button type="button" class="settings-row" data-settings="language"><span>Language</span><span class="row-detail">English <span aria-hidden="true">›</span></span></button>
+    <button type="button" class="settings-row" data-settings="favorites"><span>Favorites</span><span class="row-detail"><span id="favorites-count">0</span> <span aria-hidden="true">›</span></span></button>
+    <button type="button" class="settings-row" data-settings="feedback"><span>Feedback</span><span aria-hidden="true">›</span></button>
+    <button type="button" class="settings-row" data-settings="privacy"><span>Privacy Policy</span><span aria-hidden="true">›</span></button>
+    <div class="settings-row version-row"><span>Version</span><span id="version-value" class="row-detail">Demo</span></div>
+  </nav>
+</section>
+<section id="settings-detail" class="settings" aria-labelledby="detail-title" hidden>
+  <header class="page-heading"><button type="button" class="back-button" id="detail-back" aria-label="Back to settings">‹</button><h1 id="detail-title">Favorites</h1></header>
+  <div id="detail-favorites" class="detail-panel" hidden><div id="favorites-grid" class="favorites-grid"></div><div id="favorites-empty" class="empty-state"><h2>No favorites yet</h2><p>Tap the bookmark on a wallpaper to keep it here.</p><button type="button" class="primary" id="favorites-home">Create a wallpaper</button></div></div>
+  <div id="detail-language" class="detail-panel" hidden><button type="button" class="settings-row" id="english-language" aria-pressed="true"><span>English</span><span aria-hidden="true">✓</span></button></div>
+  <div id="detail-feedback" class="detail-panel" hidden><label for="feedback-input">Your feedback</label><textarea id="feedback-input" rows="6" placeholder="Tell us what could be better…"></textarea><p class="helper" id="feedback-note">A feedback destination has not been configured yet. Your message is not sent.</p><button type="button" class="primary" id="copy-feedback">Copy feedback</button><p class="helper" id="feedback-status" role="status"></p></div>
+  <div id="detail-privacy" class="detail-panel policy-copy" hidden><p>Privacy details for this demo are awaiting review.</p></div>
+</section>
 <div id="editor" class="editor" role="dialog" aria-modal="true" aria-label="Wallpaper editor" hidden>
 <button class="preview-backdrop" id="preview-close" aria-label="Close editor and return home"><span class="mini-preview"><div class="wallpaper"><img class="wallpaper-image" src="assets/provided-night-0.jpg" alt=""><div class="wallpaper-copy"><p class="quote"></p><p class="source"></p></div></div></span></button>
 <section id="sheet" class="sheet">
