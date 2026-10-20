@@ -17,7 +17,7 @@ The latest explicit user instructions take precedence. If requirements change, u
 
 ## Non-negotiable product decisions
 
-- Build a mobile browser experience first. Default product copy, feedback and accessible names to English, even when the conversation is Chinese.
+- Build a mobile browser experience for iPhone Safari first, delivered through HTTPS with real image export. Add PWA/home-screen support later; do not switch to native iOS or WeChat mini-program development. Default product copy, feedback and accessible names to English, even when the conversation is Chinese.
 - Retain the supplied visual composition: warm ivory UI, literary serif typography, thin borders, 4 px corners, monochrome actions and quiet spacing.
 - Keep the app shell light. Prefer dark, artistic, solitary, literary and atmospheric built-in wallpaper imagery. Do not add uploads or unrelated visual styles.
 - Quote editing includes quote, optional source and alignment. Do not add font, size or color controls unless requested.

@@ -130,3 +130,20 @@ Confirmed menu items: Language, Favorites, Feedback, version information, and Pr
 - Sheet drag, click toggle, preview close, keyboard close and scroll coexist.
 - Real export/share failure paths are tested; success messages correspond to actual outcomes.
 - AI integration is not called complete until a real provider request works securely.
+
+
+## Confirmed platform and delivery direction
+
+Prioritize mobile web for iPhone Safari. The delivery target is an accessible HTTPS site with real high-resolution image export; a downloaded HTML snapshot is only an interim review artifact. Add home-screen/PWA support later. Native iOS and WeChat mini-program implementations are outside the current plan.
+
+For iPhone saving, detect supported image-file sharing and let the user choose Save Image in the system share sheet where available. Provide a viewable/downloadable image fallback. Do not promise direct Photos-library writes or automatic wallpaper changes. Real-device Safari validation is required before claiming that saving flow works. Export aspect ratio and resolution remain deferred pending user confirmation.
+
+
+## Confirmed demo content direction
+
+The user requests AI-created quote copy and background imagery. The current demo uses three pre-generated dark literary artworks and 12 original AI-written English lines. Label them as AI-created originals; do not attribute them to historical authors or imply live generation. The supplied prototype remains archived. This replaces the prior temporary decision to retain its artwork and quotes in the active demo, without changing component structure.
+
+
+## Latest background source update
+
+The user supplied an updated HTML containing 12 dark backgrounds to replace the separately generated set. Use all 12 supplied images in the active demo; stop further image generation unless requested. Retain AI-original English quote copy. This supersedes the previous three-image demo content choice.

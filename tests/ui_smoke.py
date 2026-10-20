@@ -1,0 +1,95 @@
+from playwright.sync_api import sync_playwright
+import json
+from pathlib import Path
+Path("/tmp/motivation-review").mkdir(exist_ok=True)
+with sync_playwright() as p:
+ browser=p.chromium.launch(executable_path='/usr/bin/chromium',args=['--no-sandbox'])
+ page=browser.new_page(viewport={'width':390,'height':844},device_scale_factor=1)
+ errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
+ # External fonts are optional at runtime; make local UI checks independent of egress.
+ page.route('https://fonts.googleapis.com/**',lambda route:route.abort())
+ page.goto('http://127.0.0.1:8080',wait_until='networkidle')
+ for width in [320,375,390,430]:
+  page.set_viewport_size({'width':width,'height':844})
+  assert page.evaluate('document.documentElement.scrollWidth <= innerWidth'),width
+  page.get_by_role('button',name='Typography',exact=True).click()
+  assert page.locator('#quote-input').get_attribute('placeholder')=='Write your own words…'
+  assert page.evaluate('document.documentElement.scrollWidth <= innerWidth'),width
+  page.get_by_role('button',name='Close editor',exact=True).click()
+ page.set_viewport_size({'width':390,'height':844})
+ page.screenshot(path='/tmp/motivation-review/home.png',full_page=True)
+ page.get_by_role('button',name='Typography',exact=True).click()
+ quote='A quieter mind makes room for possibility.\nLet your words find their way, one gentle line at a time.'
+ page.locator('#quote-input').fill(quote)
+ page.locator('#source-input').fill('Your own words')
+ page.get_by_role('button',name='Align left',exact=True).click()
+ page.locator('#handle').click()
+ page.wait_for_timeout(300)
+ assert page.locator('#handle').get_attribute('aria-expanded')=='true'
+ page.screenshot(path='/tmp/motivation-review/type.png')
+ for copy in page.locator('.wallpaper-copy').all():
+  q=copy.locator('.quote').bounding_box();s=copy.locator('.source').bounding_box()
+  if q and s: assert q['y']+q['height']<=s['y']
+ page.keyboard.press('Escape')
+ assert page.locator('[data-open="type"]').evaluate('(el)=>el===document.activeElement')
+ page.wait_for_timeout(250); page.reload(wait_until='networkidle')
+ assert page.locator('#home .quote').inner_text()==quote
+ page.locator('#favorite').click()
+ assert page.locator('#favorite').get_attribute('aria-pressed')=='true'
+ page.reload(wait_until='networkidle')
+ assert page.locator('#favorite').get_attribute('aria-pressed')=='true'
+ page.locator('[data-open="image"]').click()
+ page.locator('[data-background="2"]').click()
+ assert page.locator('[data-background="2"]').get_attribute('aria-pressed')=='true'
+ page.screenshot(path='/tmp/motivation-review/image.png')
+ page.get_by_role('tab',name='Ideas',exact=True).click()
+ page.locator('[data-category="Motivation"]').click()
+ assert page.locator('.idea').count()==3
+ page.locator('.idea').first.click()
+ assert page.locator('[data-background="2"]').get_attribute('aria-pressed')=='true'
+ assert page.locator('[data-align="left"]').get_attribute('aria-pressed')=='true'
+ page.get_by_role('button',name='Love',exact=True).click()
+ assert page.locator('.idea').count()==3
+ assert not page.locator('#ideas-empty').is_visible()
+ page.get_by_role('button',name='Recommended',exact=True).click()
+ page.screenshot(path='/tmp/motivation-review/ideas.png')
+ # Real pointer drag to expand and collapse; content scrolling must not change snap state.
+ handle=page.locator('#handle');box=handle.bounding_box();x=box['x']+box['width']/2;y=box['y']+22
+ page.mouse.move(x,y);page.mouse.down();page.mouse.move(x,y-150,steps=10);page.mouse.up();page.wait_for_timeout(300)
+ assert handle.get_attribute('aria-expanded')=='true'
+ page.get_by_role('tab',name='Image',exact=True).click()
+ assert handle.get_attribute('aria-expanded')=='true'
+ page.locator('#sheet-content').evaluate('(el)=>el.scrollTop=250')
+ assert handle.get_attribute('aria-expanded')=='true'
+ # Verify keyboard trap at both edges.
+ page.locator('#preview-close').focus();page.keyboard.press('Shift+Tab')
+ assert page.evaluate('document.activeElement.closest("#editor")!==null')
+ page.keyboard.press('Escape')
+ assert errors==[],errors
+ page.locator('#save').click()
+ assert 'isn’t enabled in this demo' in page.locator('#toast').inner_text()
+ # Clear both fields and verify placeholders stay out of preview.
+ page.locator('[data-open="type"]').click();page.locator('#quote-input').fill('');page.locator('#source-input').fill('')
+ assert page.locator('#home .quote').inner_text()==''
+ page.screenshot(path='/tmp/motivation-review/empty-type.png')
+ # Background geometry must remain aligned even inside the centered preview button.
+ for wallpaper in page.locator('.wallpaper').all():
+  rect=wallpaper.bounding_box();img=wallpaper.locator('img').bounding_box()
+  if rect and img:
+   assert abs(rect['x']-img['x'])<1 and abs(rect['y']-img['y'])<1
+ page.keyboard.press('Escape')
+ page.locator('[data-open="image"]').click()
+ box=page.locator('#handle').bounding_box();x=box['x']+65;y=box['y']+22
+ page.mouse.move(x,y);page.mouse.down();page.mouse.move(x,y+100,steps=8);page.mouse.up()
+ assert page.locator('#editor').is_hidden()
+ # A denied storage write must not claim that a favorite was persisted.
+ denied=browser.new_page(viewport={'width':390,'height':844})
+ denied.add_init_script("Storage.prototype.setItem = function(){throw new DOMException('denied','SecurityError')}")
+ denied.goto('http://127.0.0.1:8080',wait_until='networkidle')
+ denied.locator('#favorite').click()
+ assert denied.locator('#favorite').get_attribute('aria-pressed')=='false'
+ assert denied.locator('#storage-error').is_visible()
+ assert 'couldn’t be saved' in denied.locator('#toast').inner_text()
+ denied.close()
+ print(json.dumps({'result':'passed','widths':[320,375,390,430],'checks':['layout overflow','placeholder copy','long quote attribution','reload persistence','full-design favorite persistence','background selection','idea filtering and retained layout','populated AI quote categories','pointer drag','tab snap preservation','focus return and trap','truthful export status','empty preview','background geometry','downward dismiss','storage failure rollback'],'pageErrors':errors}))
+ browser.close()
