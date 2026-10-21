@@ -174,3 +174,12 @@ The latest annotated screenshot specifies 24 px top/left/right in the reference 
 - Keep wallpaper typography fixed. Stop input when its rendered quote plus attribution would exceed the 24 px top/side bounds and the 10 px separation above actions. Limit by measured layout, not an arbitrary universal character count: letters, languages and newlines occupy different space.
 - Long paste inserts only a fitting portion, preserving existing surrounding text. Composition input is evaluated on commit, and grapheme segmentation avoids splitting emoji. Source edits share the same layout budget. Previously oversized stored text is fitted when restored, with feedback.
 - The main, mini and favorite previews share reference-space layout; the offscreen measurement reference uses the same fonts and dimensions. No scrollable wallpaper text or auto-shrinking is used.
+
+
+## Confirmed entry icons and toast UI (2026-10-21)
+
+Use the supplied unmodified SVGs: Typography `Group 22.svg` at 39×39 and Inspiration `Group 29.svg` at 42×42. Preserve complete viewBoxes and internal whitespace. A common 42px layout slot keeps the entry labels aligned, with each asset rendered at its specified size. This supersedes the earlier identical export-size guidance.
+
+Toast styling follows the user's supplied example: #1A1918 background, white left-aligned 18/24px copy, 4px corners, 12px inner padding and 12px icon gap. Short messages hug their contents; long messages wrap with at least 24px clearance from both edges of the app, including at narrow widths. Use the supplied 28×28 SVGs: `Group 24.svg` for reminders and `Group 24 (1).svg` for success. Keep existing bottom placement and 3-second dismissal. Respect reduced motion and expose the text through an atomic polite live region.
+
+Use success only after persistence or copying actually succeeds. Input limits, unavailable saving/sharing and failed storage use reminders. Identical visible messages are not repeatedly restarted while the user keeps typing at the limit. Do not show multiple stacked runtime notifications; the design reference demonstrates variants.

@@ -38,7 +38,21 @@
     try { localStorage.setItem(key, JSON.stringify({design,favorites})); $('#storage-error').hidden = true; return true; }
     catch { storageError('Your changes couldn’t be saved on this device.'); return false; }
   }
-  function toast(message) { clearTimeout(timer); $('#toast').textContent = t(message); $('#toast').classList.add('visible'); timer = setTimeout(() => $('#toast').classList.remove('visible'),3000); }
+  let lastToast = '';
+  function toast(message, kind = 'info') {
+    const text = t(message), state = kind + ':' + text;
+    if (lastToast === state && $('#toast').classList.contains('visible')) return;
+    clearTimeout(timer); lastToast = state;
+    $('#toast-message').textContent = text;
+    $('#toast-icon').src = $('#toast-icon').dataset[kind === 'success' ? 'success' : 'info'];
+    $('#toast').dataset.kind = kind;
+    $('#toast').classList.add('visible');
+    timer = setTimeout(() => $('#toast').classList.remove('visible'), 3000);
+  }
+  function showTextLimit() {
+    $('#text-limit').hidden = false;
+    toast('Text limit reached. Remove some text to continue.');
+  }
   function paint(wallpaper, value) {
     const image = wallpaper.querySelector('.wallpaper-image');
     if (image.getAttribute('src') !== backgrounds[value.background]) image.src = backgrounds[value.background];
@@ -75,7 +89,7 @@
     const previous=favorites.slice(); const index=favorites.findIndex(d => signature(d) === signature(design));
     if (index < 0) favorites.push({...design}); else favorites.splice(index,1);
     if (!persist()) { favorites=previous; toast('Your favorite couldn’t be saved on this device.'); }
-    else toast(index < 0 ? 'Added to favorites' : 'Removed from favorites');
+    else toast(index < 0 ? 'Added to favorites' : 'Removed from favorites','success');
     render();
   });
   $$('[data-background]').forEach(el => el.addEventListener('click',() => { design.background=+el.dataset.background; render(); persist(); }));
@@ -113,6 +127,7 @@
   function commitInput(property,field) {
     const candidate = field.value, accepted = fits({...design,[property]:candidate}) ? candidate : fittingInsertion(property,candidate);
     $('#text-limit').hidden = accepted === candidate;
+    if (accepted !== candidate) showTextLimit();
     if (accepted !== candidate) { const cursor = field.selectionStart; field.value = accepted; field.setSelectionRange(Math.min(cursor,accepted.length),Math.min(cursor,accepted.length)); }
     design[property]=accepted; render(); clearTimeout(saveTimer); saveTimer=setTimeout(persist,200);
   }
@@ -122,7 +137,7 @@
       if (event.isComposing || !event.inputType.startsWith('insert') || event.data === null) return;
       const candidate = field.value.slice(0,field.selectionStart)+event.data+field.value.slice(field.selectionEnd);
       if (!fits({...design,[property]:candidate})) {
-        event.preventDefault(); field.value=fittingInsertion(property,candidate); commitInput(property,field); $('#text-limit').hidden=false;
+        event.preventDefault(); field.value=fittingInsertion(property,candidate); commitInput(property,field); showTextLimit();
       }
     });
     field.addEventListener('input',event => { if (!event.isComposing) commitInput(property,field); });
@@ -247,7 +262,7 @@
       remove.addEventListener('click', () => {
         const previous = favorites.slice(); favorites.splice(index, 1);
         if (!persist()) { favorites = previous; toast('Your favorite couldn’t be removed on this device.'); return; }
-        render(); renderFavorites();
+        render(); renderFavorites(); toast('Removed from favorites','success');
         (grid.querySelector('.favorite-remove') || $('#detail-title')).focus();
       });
       item.append(restore, remove); grid.append(item);
@@ -282,7 +297,7 @@
     const check=document.createElement('span'); check.className='language-check'; check.setAttribute('aria-hidden','true'); check.textContent='✓';
     button.append(label,check); button.addEventListener('click',() => {
       language=code; translateUI();
-      try { localStorage.setItem('motivation.language',code); toast('Language updated'); }
+      try { localStorage.setItem('motivation.language',code); toast('Language updated','success'); }
       catch { toast('Your language preference couldn’t be saved on this device.'); }
       button.focus();
     }); $('#language-options').append(button);
@@ -294,6 +309,7 @@
       if (!navigator.clipboard?.writeText) throw Error('Clipboard unavailable');
       await navigator.clipboard.writeText(field.value);
       status.textContent = t('Feedback copied. It has not been sent.');
+      toast('Feedback copied. It has not been sent.','success');
     } catch { field.focus(); field.select(); status.textContent = t('Copy isn’t available here. Select and copy your message manually.'); }
   });
   window.addEventListener('hashchange', () => renderRoute());

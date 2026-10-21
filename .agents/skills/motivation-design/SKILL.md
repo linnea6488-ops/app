@@ -51,6 +51,6 @@ The latest explicit user instructions take precedence. If requirements change, u
 
 See the reference for complete tokens, measurements, component contracts and acceptance checks. No external messaging, publishing or deployment is authorized merely by applying this skill.
 
-User-confirmed UI revision: no simulated iOS status-area spacer, no visible sheet close icon, and no “Original words · AI-created” heading. See the latest reference section for screenshot geometry and input color. Keep icon replacements pending until the user supplies them.
+User-confirmed UI revision: no simulated iOS status-area spacer, no visible sheet close icon, and no “Original words · AI-created” heading. See the latest reference section for screenshot geometry and input color. Use the latest supplied icon assets documented in the reference.
 
-Both replacement entry icons use the same 39×39 logical container, preserving the supplied internal whitespace. The latest reference supersedes the earlier different export sizes.
+The latest supplied entry icons render at their original 39×39 (Typography) and 42×42 (Inspiration) dimensions, with internal whitespace preserved and aligned layout slots. Toasts use the supplied success/reminder SVGs and the latest 24px side-clearance specification.
