@@ -118,7 +118,10 @@
   $$('[data-open]').forEach(el => el.addEventListener('click',() => {
     returnFocus=el; syncFields(); changeTab(el.dataset.open); setExpanded(false); editor.hidden=false;
     document.body.classList.add('editing'); $('#home').inert=true; $('.header').inert=true; document.body.style.overflow='hidden';
-    transitionEditor(true,() => $('#tab-'+el.dataset.open).focus());
+    // Keep initial focus on the neutral dialog during the user gesture, not on a tab.
+    // Intentional keyboard arrow navigation can still focus the tabs afterwards.
+    editor.tabIndex=-1; editor.focus({preventScroll:true});
+    transitionEditor(true,() => {});
   }));
   $('#brand').addEventListener('click',() => window.scrollTo({top:0,behavior:'smooth'}));
   $('#preview-close').addEventListener('click',close);

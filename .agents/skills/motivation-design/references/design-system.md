@@ -204,3 +204,8 @@ Use success only after persistence or copying actually succeeds. Input limits, u
 ## Input focus and full sheet dismissal (2026-10-21)
 
 Focusing either Quote or Source raises the sheet to its highest position before scrolling the focused field into view. Feedback-page input does not expand the editor sheet. On a deliberate downward handle gesture from the highest position, fully dismiss the editor instead of snapping to the intermediate height. A short accidental movement returns to the highest snap. Clicking the handle while expanded also dismisses it; clicking from standard height still expands it. Blur editor input when dismissing so keyboard focus is released, preserve the edited design within the visit, and retain the reverse wallpaper/sheet animation.
+
+
+## First-open tab focus correction (2026-10-21)
+
+Initial editor entry must not programmatically focus Image/Type/Ideas after the animation. Focus the neutral dialog container synchronously in the entry gesture, with no outline on the container. Keyboard users can still reach the tab list and use arrow navigation. Keep tab focus styling free of rectangular outlines. Test first and subsequent opens in fresh touch-enabled browser contexts, not only repeat clicks within one visit.
