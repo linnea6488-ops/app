@@ -17,7 +17,8 @@ and artwork. Internal navigation retains your current edits.
 
 The current implementation covers home and Image / Type / Ideas editing.
 Settings navigation, local favorite restore/removal and feedback copying are available.
-Eight interface languages are available with a persisted preference. The demo
+Eight interface languages are available with a persisted preference. Built-in
+ideas follow the selected language; user-authored text stays unchanged. The demo
 feedback address is explicitly fictitious; messages can be copied, not sent.
 Demo 0.1 includes a factual privacy notice. Quote/source input is bounded by
 actual fixed-size layout, including pasted text and IME composition. Live AI generation
@@ -39,6 +40,7 @@ Chromium at `/usr/bin/chromium` (both available in the current cloud environment
 python3 tests/ui_smoke.py
 python3 tests/settings_limits_smoke.py
 python3 tests/fresh_home_smoke.py
+python3 tests/ideas_layout_smoke.py
 ```
 
 This checks actual browser rendering, responsive overflow, editing, local state,

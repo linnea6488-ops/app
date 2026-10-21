@@ -19,10 +19,10 @@
     staticAttributes.forEach(({node,attribute,base}) => node.setAttribute(attribute,t(base)));
     $('#current-language').textContent = translations.names[translations.codes.indexOf(language)];
     $$('[data-language]').forEach(el => el.setAttribute('aria-pressed',String(el.dataset.language === language)));
-    render(); renderRoute(false); setExpanded(expanded);
+    localizeCurrentIdea(); syncFields(); renderIdeas(); normalizeDesign(); persist(); renderRoute(false); setExpanded(expanded);
   }
   const key = 'motivation.design.v3';
-  const defaults = {quote:'Let the quiet\nbring you back to yourself.',source:'AI original',align:'center',background:0};
+  const defaults = {quote:'Let the quiet bring you back to yourself.',source:'',align:'center',background:0};
   let previousDesign = null, lastHome = null;
   let design = {...defaults}, favorites = [], category = 'Recommended', expanded = false, returnFocus, timer, saveTimer;
   const editor = $('#editor'), sheet = $('#sheet');
@@ -168,6 +168,10 @@
     $('#text-limit').hidden = accepted === candidate;
     if (accepted !== candidate) showTextLimit();
     if (accepted !== candidate) { const cursor = field.selectionStart; field.value = accepted; field.setSelectionRange(Math.min(cursor,accepted.length),Math.min(cursor,accepted.length)); }
+    if (accepted !== design[property]) {
+      if (property==='quote') delete design.ideaId;
+      if (property==='source') design.sourceIsBuiltIn=false;
+    }
     design[property]=accepted; render(); clearTimeout(saveTimer); saveTimer=setTimeout(persist,200);
   }
   [['quote','quote-input'],['source','source-input']].forEach(([property,id]) => {
@@ -207,87 +211,110 @@
   // Original AI-written demo content, not quotations attributed to real people.
   const ideas=[
   {
-    "quote": "Let the quiet\nbring you back to yourself.",
+    "quote": "Let the quiet bring you back to yourself.",
     "source": "AI original",
-    "category": "Philosophy"
+    "category": "Philosophy",
+    "id": "idea-0"
   },
   {
-    "quote": "Not every question\nneeds an answer tonight.",
+    "quote": "Not every question needs an answer tonight.",
     "source": "AI original",
-    "category": "Philosophy"
+    "category": "Philosophy",
+    "id": "idea-1"
   },
   {
-    "quote": "Some things become clear\nonly when we stop chasing them.",
+    "quote": "Some things become clear only when we stop chasing them.",
     "source": "AI original",
-    "category": "Philosophy"
+    "category": "Philosophy",
+    "id": "idea-2"
   },
   {
-    "quote": "A small beginning\nis still a beginning.",
+    "quote": "A small beginning is still a beginning.",
     "source": "AI original",
-    "category": "Motivation"
+    "category": "Motivation",
+    "id": "idea-3"
   },
   {
-    "quote": "You can move forward\nwithout having the whole map.",
+    "quote": "You can move forward without having the whole map.",
     "source": "AI original",
-    "category": "Motivation"
+    "category": "Motivation",
+    "id": "idea-4"
   },
   {
-    "quote": "Take the next kind step.\nThen take another.",
+    "quote": "Take the next kind step. Then take another.",
     "source": "AI original",
-    "category": "Motivation"
+    "category": "Motivation",
+    "id": "idea-5"
   },
   {
-    "quote": "Love can be quiet\nand still fill a room.",
+    "quote": "Love can be quiet and still fill a room.",
     "source": "AI original",
-    "category": "Love"
+    "category": "Love",
+    "id": "idea-6"
   },
   {
-    "quote": "May we make room\nfor each other to become.",
+    "quote": "May we make room for each other to become.",
     "source": "AI original",
-    "category": "Love"
+    "category": "Love",
+    "id": "idea-7"
   },
   {
-    "quote": "Some hearts feel like\na light left on.",
+    "quote": "Some hearts feel like a light left on.",
     "source": "AI original",
-    "category": "Love"
+    "category": "Love",
+    "id": "idea-8"
   },
   {
-    "quote": "Home is made\nin the ways we care.",
+    "quote": "Home is made in the ways we care.",
     "source": "AI original",
-    "category": "Family"
+    "category": "Family",
+    "id": "idea-9"
   },
   {
-    "quote": "The ordinary days\nare part of what we keep.",
+    "quote": "The ordinary days are part of what we keep.",
     "source": "AI original",
-    "category": "Family"
+    "category": "Family",
+    "id": "idea-10"
   },
   {
-    "quote": "May there always be\na place for you at the table.",
+    "quote": "May there always be a place for you at the table.",
     "source": "AI original",
-    "category": "Family"
+    "category": "Family",
+    "id": "idea-11"
   }
 ];
+  function localizedIdea(idea) { return {...idea,quote:t(idea.quote),source:t(idea.source)}; }
+  function localizeCurrentIdea() {
+    const idea=ideas.find(item => item.id===design.ideaId);
+    if (!idea) return;
+    const translated=localizedIdea(idea);
+    design.quote=translated.quote;
+    if (design.sourceIsBuiltIn) design.source=translated.source;
+  }
   function freshDesign(previous = previousDesign) {
-    const quoteChoices = ideas.filter(idea => idea.quote !== previous?.quote && idea.quote !== lastHome?.quote);
+    const quoteChoices = ideas.filter(idea => idea.id !== previous?.ideaId && idea.id !== lastHome?.ideaId && localizedIdea(idea).quote !== previous?.quote && localizedIdea(idea).quote !== lastHome?.quote);
     const imageChoices = backgrounds.map((_,index) => index).filter(index => index !== previous?.background && index !== lastHome?.background);
     const quotes = quoteChoices.length ? quoteChoices : ideas;
     const images = imageChoices.length ? imageChoices : backgrounds.map((_,index) => index);
-    const idea = quotes[Math.floor(Math.random() * quotes.length)];
+    const idea = localizedIdea(quotes[Math.floor(Math.random() * quotes.length)]);
     const background = images[Math.floor(Math.random() * images.length)];
-    design = {...defaults, quote:idea.quote, source:idea.source, background};
-    lastHome = {quote:idea.quote, background};
+    design = {...defaults, quote:idea.quote, source:'', ideaId:idea.id, sourceIsBuiltIn:false, background};
+    lastHome = {quote:idea.quote, ideaId:idea.id, background};
     category = 'Recommended';
   }
   function renderIdeas() {
     $('#ideas-grid').replaceChildren();
     const filtered=ideas.filter(idea => category==='Recommended' || idea.category===category);
     $('#ideas-empty').hidden=filtered.length>0;
-    filtered.forEach(idea => {
-      const button=document.createElement('button'); button.type='button'; button.className='idea'; button.dataset.quote=idea.quote; button.dataset.source=idea.source;
+    const columns=[document.createElement('div'),document.createElement('div')];
+    columns.forEach(el => {el.className='idea-column';$('#ideas-grid').append(el);});
+    filtered.forEach((base,index) => {
+      const idea=localizedIdea(base);
+      const button=document.createElement('button'); button.type='button'; button.className='idea'; button.dataset.quote=idea.quote; button.dataset.source=''; button.dataset.ideaId=idea.id;
       const text=document.createElement('span'); text.textContent=idea.quote;
       const source=document.createElement('span'); source.className='idea-source'; source.textContent=idea.source;
-      button.append(text,source); button.addEventListener('click',() => { design.quote=idea.quote; design.source=idea.source; syncFields(); render(); persist(); });
-      $('#ideas-grid').append(button);
+      button.append(text,source); button.addEventListener('click',() => { design.quote=idea.quote; design.source=''; design.ideaId=idea.id; design.sourceIsBuiltIn=false; syncFields(); render(); persist(); });
+      columns[index%2].append(button);
     });
     $$('[data-category]').forEach(el => el.setAttribute('aria-pressed',String(el.dataset.category===category))); render();
   }

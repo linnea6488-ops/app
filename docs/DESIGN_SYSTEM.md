@@ -190,3 +190,12 @@ Use success only after persistence or copying actually succeeds. Input limits, u
 - A fresh visit shows a randomly selected built-in idea and background instead of restoring custom text. Avoid the immediately preceding quote and artwork; retain saved favorite designs and language preference. Internal editor/settings navigation preserves in-progress edits. Resume from a hidden page or BFCache also refreshes the home design once, without duplicate refresh events.
 - Toasts appear at the top, 24px plus the actual safe-area inset, with no border. Keep the existing 24px side clearance, 4px corners, supplied icons, wrapping and auto-dismissal. This supersedes the previous bottom placement and border.
 - Opening any of the three home entries scales the wallpaper smoothly from its main card to the mini preview while the sheet rises from the bottom. Close reverses the transition. Use a shared composition clone so text does not reflow mid-transition. Duration 360ms with the established easing curve; respect reduced-motion by opening/closing immediately. Clean up animation overlays after completion or interruption.
+
+
+## Screenshot corrections: localized ideas, card flow and source guidance (2026-10-21)
+
+- Translate all 12 built-in ideas and their AI-original captions into the chosen interface language. A selected built-in idea updates consistently on home, mini preview, idea cards and Type input when language changes. Identify built-in entries with stable IDs; never translate user-authored quotes or sources. Saved favorites remain snapshots.
+- Built-in idea strings contain no forced line breaks. Let each surface wrap naturally at its own width. Preserve line breaks explicitly entered by users.
+- Pack the ideas into two independently flowing columns, placing successive ideas alternately left/right. Each column has a strict 10px vertical gap; a taller card must not create extra blank space below its shorter neighbor.
+- Newly selected/generated built-in designs have no prefilled Source. Source shows the localized “Enter an author or source…” placeholder until the user writes one. Source placeholder and value use #C4BFBA, matching Quote. AI-original labels remain localized on inspiration cards; they are not inserted as the user’s attribution.
+- Remove the rectangular focus outline from Image/Type/Ideas tabs, including programmatic touch focus. Preserve selection underlines and a text-underline keyboard-focus cue. Other controls retain visible focus styles.

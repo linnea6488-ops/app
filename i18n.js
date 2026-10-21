@@ -821,6 +821,141 @@ window.MotivationI18n = {
       "Elk nieuw bezoek begint met nieuwe tekst en een achtergrond. Favorieten en je taalkeuze blijven bewaard.",
       "새로 방문할 때마다 새 문구와 배경이 표시되며 즐겨찾기와 언어 설정은 유지됩니다.",
       "再び開くたびに新しい文面と背景を表示します。お気に入りと言語設定は保持されます。"
+    ],
+    "Let the quiet bring you back to yourself.": [
+      "讓寧靜帶你找回自己。",
+      "Laissez le calme vous ramener à vous-même.",
+      "Lass die Stille dich zu dir selbst zurückbringen.",
+      "Lascia che la quiete ti riporti a te.",
+      "Laat de stilte je terugbrengen bij jezelf.",
+      "고요함 속에서 나 자신을 다시 만나세요.",
+      "静けさの中で、自分を取り戻そう。"
+    ],
+    "Not every question needs an answer tonight.": [
+      "不是每個問題都需要在今晚找到答案。",
+      "Toutes les questions n’ont pas besoin d’une réponse ce soir.",
+      "Nicht jede Frage braucht heute Nacht eine Antwort.",
+      "Non ogni domanda ha bisogno di una risposta stanotte.",
+      "Niet elke vraag heeft vannacht een antwoord nodig.",
+      "모든 질문에 오늘 밤 답할 필요는 없어요.",
+      "すべての問いに、今夜答えなくてもいい。"
+    ],
+    "Some things become clear only when we stop chasing them.": [
+      "有些事，放下追逐後才會清晰。",
+      "Certaines choses deviennent claires quand on cesse de les poursuivre.",
+      "Manches wird erst klar, wenn wir aufhören, ihm nachzujagen.",
+      "Alcune cose diventano chiare solo quando smettiamo di inseguirle.",
+      "Sommige dingen worden pas duidelijk als we ze niet meer najagen.",
+      "쫓기를 멈출 때 비로소 선명해지는 것들이 있어요.",
+      "追いかけるのをやめて初めて、見えてくるものがある。"
+    ],
+    "A small beginning is still a beginning.": [
+      "微小的開始，也是一個開始。",
+      "Un petit commencement reste un commencement.",
+      "Auch ein kleiner Anfang ist ein Anfang.",
+      "Anche un piccolo inizio è un inizio.",
+      "Een klein begin is ook een begin.",
+      "작은 시작도 분명한 시작이에요.",
+      "小さな始まりも、確かな始まり。"
+    ],
+    "You can move forward without having the whole map.": [
+      "即使沒有完整的地圖，你仍能向前。",
+      "On peut avancer sans avoir toute la carte.",
+      "Du kannst weitergehen, auch ohne die ganze Karte zu kennen.",
+      "Puoi andare avanti anche senza avere tutta la mappa.",
+      "Je kunt vooruit zonder de hele kaart te hebben.",
+      "모든 길을 몰라도 앞으로 나아갈 수 있어요.",
+      "地図のすべてがわからなくても、前に進める。"
+    ],
+    "Take the next kind step. Then take another.": [
+      "溫柔地走出下一步，再走下一步。",
+      "Faites un pas avec douceur. Puis un autre.",
+      "Geh den nächsten Schritt mit Güte. Und dann noch einen.",
+      "Fai il prossimo passo con gentilezza. Poi un altro.",
+      "Zet de volgende stap met zachtheid. En dan nog een.",
+      "다정한 마음으로 한 걸음, 그리고 또 한 걸음.",
+      "やさしい一歩を踏み出そう。そして、もう一歩。"
+    ],
+    "Love can be quiet and still fill a room.": [
+      "愛可以安靜，卻仍充滿整個房間。",
+      "L’amour peut être discret et remplir toute une pièce.",
+      "Liebe kann leise sein und doch einen ganzen Raum erfüllen.",
+      "L’amore può essere silenzioso e riempire una stanza.",
+      "Liefde kan stil zijn en toch een kamer vullen.",
+      "사랑은 조용해도 온 방을 채울 수 있어요.",
+      "愛は静かでも、部屋いっぱいに満ちている。"
+    ],
+    "May we make room for each other to become.": [
+      "願我們為彼此的成長留出空間。",
+      "Puissions-nous laisser à chacun la place de devenir soi.",
+      "Mögen wir einander Raum zum Wachsen geben.",
+      "Che possiamo darci spazio per diventare noi stessi.",
+      "Mogen we elkaar de ruimte geven om te groeien.",
+      "서로가 되어 갈 모습을 위한 자리를 내어 주세요.",
+      "お互いが自分らしくなれる余白を、大切に。"
+    ],
+    "Some hearts feel like a light left on.": [
+      "有些人的心，像一盞為你留著的燈。",
+      "Certains cœurs ressemblent à une lumière restée allumée.",
+      "Manche Herzen sind wie ein Licht, das für dich brennt.",
+      "Certi cuori sono come una luce lasciata accesa.",
+      "Sommige harten voelen als een licht dat blijft branden.",
+      "어떤 마음은 나를 위해 켜 둔 불빛 같아요.",
+      "灯りをともして待っていてくれるような心がある。"
+    ],
+    "Home is made in the ways we care.": [
+      "家，藏在我們照顧彼此的方式裡。",
+      "Un foyer se construit dans l’attention que l’on se porte.",
+      "Zuhause entsteht dort, wo wir füreinander sorgen.",
+      "La casa nasce nei gesti con cui ci prendiamo cura l’uno dell’altro.",
+      "Een thuis ontstaat in de zorg voor elkaar.",
+      "집은 서로를 돌보는 마음으로 만들어져요.",
+      "思いやりを重ねることで、家は居場所になる。"
+    ],
+    "The ordinary days are part of what we keep.": [
+      "平凡的日子，也是值得珍藏的部分。",
+      "Les jours ordinaires font aussi partie de ce que l’on garde.",
+      "Auch die gewöhnlichen Tage gehören zu dem, was wir bewahren.",
+      "Anche i giorni ordinari fanno parte di ciò che custodiamo.",
+      "Ook gewone dagen horen bij wat we bewaren.",
+      "평범한 날들도 우리가 간직할 소중한 일부예요.",
+      "何気ない日々も、大切に残していくもの。"
+    ],
+    "May there always be a place for you at the table.": [
+      "願餐桌旁，永遠有你的位置。",
+      "Qu’il y ait toujours une place pour vous à table.",
+      "Möge am Tisch immer ein Platz für dich sein.",
+      "Che ci sia sempre un posto per te a tavola.",
+      "Moge er altijd een plek voor je zijn aan tafel.",
+      "언제나 식탁에 당신의 자리가 있기를.",
+      "食卓には、いつでもあなたの席がありますように。"
+    ],
+    "AI original": [
+      "AI 原創",
+      "Création IA",
+      "KI-Original",
+      "Originale IA",
+      "AI-origineel",
+      "AI 창작",
+      "AIオリジナル"
+    ],
+    "Enter an author or source…": [
+      "輸入你想顯示的作者或出處…",
+      "Saisissez un auteur ou une source…",
+      "Gib einen Autor oder eine Quelle ein…",
+      "Inserisci un autore o una fonte…",
+      "Voer een auteur of bron in…",
+      "표시할 작성자나 출처를 입력하세요…",
+      "表示したい作者や出典を入力してください…"
+    ],
+    "Built-in inspiration follows this language. Your own words stay unchanged.": [
+      "內建靈感會跟隨此語言，你自己寫的文案保持不變。",
+      "Les textes intégrés suivent cette langue. Vos propres mots restent inchangés.",
+      "Integrierte Texte folgen dieser Sprache. Deine eigenen Worte bleiben unverändert.",
+      "I testi inclusi seguono questa lingua. Le tue parole restano invariate.",
+      "Ingebouwde teksten volgen deze taal. Je eigen woorden blijven ongewijzigd.",
+      "내장 문구는 선택한 언어로 바뀌며 직접 쓴 글은 유지됩니다.",
+      "内蔵の文面は選んだ言語に切り替わります。自分で書いた言葉は変わりません。"
     ]
   }
 };

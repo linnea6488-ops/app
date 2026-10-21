@@ -45,7 +45,7 @@ The latest explicit user instructions take precedence. If requirements change, u
 - Amiri for brand, quote and literary labels; system sans for fields and operational copy.
 - Reference width 390 px with 24 px gutters; 16 px gutters may be used at narrow widths.
 - Main Save button 56 px high; circular actions 44 px; component radius 4 px.
-- Empty Quote: “Please enter what you want to describe.” (placeholder and entered quote text #C4BFBA); empty Source: “Add an author or source (optional)”.
+- Empty Quote: “Please enter what you want to describe.” (placeholder and entered quote text #C4BFBA); empty Source: “Enter an author or source…” (#C4BFBA, no prefilled AI attribution).
 - Selected dark thumbnails need a clear outline/check; dark artwork needs readable light quote and source text.
 - English toasts must describe an operation that actually happened. A toast alone does not implement save, share, feedback or AI generation.
 
@@ -56,3 +56,5 @@ User-confirmed UI revision: no simulated iOS status-area spacer, no visible shee
 The latest supplied entry icons render at their original 39×39 (Typography) and 42×42 (Inspiration) dimensions, with internal whitespace preserved and aligned layout slots. Toasts use the supplied success/reminder SVGs and the latest 24px side-clearance specification.
 
 Latest user direction: top, borderless toasts; opening editor entries scales the wallpaper down and slides the sheet up, reversing on close and respecting reduced motion. See the latest reference for lifecycle and animation details.
+
+Built-in ideas follow all eight selected languages throughout home, preview and Type. Preserve custom text verbatim. Use stable built-in IDs, natural wrapping without injected newlines, 10px independent-column idea spacing, and no rectangular tab focus outline.
