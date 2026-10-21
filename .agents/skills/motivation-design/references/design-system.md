@@ -183,3 +183,10 @@ Use the supplied unmodified SVGs: Typography `Group 22.svg` at 39×39 and Inspir
 Toast styling follows the user's supplied example: #1A1918 background, white left-aligned 18/24px copy, 4px corners, 12px inner padding and 12px icon gap. Short messages hug their contents; long messages wrap with at least 24px clearance from both edges of the app, including at narrow widths. Use the supplied 28×28 SVGs: `Group 24.svg` for reminders and `Group 24 (1).svg` for success. Keep existing bottom placement and 3-second dismissal. Respect reduced motion and expose the text through an atomic polite live region.
 
 Use success only after persistence or copying actually succeeds. Input limits, unavailable saving/sharing and failed storage use reminders. Identical visible messages are not repeatedly restarted while the user keeps typing at the limit. Do not show multiple stacked runtime notifications; the design reference demonstrates variants.
+
+
+## Latest visit, toast and editor transition rules (2026-10-21)
+
+- A fresh visit shows a randomly selected built-in idea and background instead of restoring custom text. Avoid the immediately preceding quote and artwork; retain saved favorite designs and language preference. Internal editor/settings navigation preserves in-progress edits. Resume from a hidden page or BFCache also refreshes the home design once, without duplicate refresh events.
+- Toasts appear at the top, 24px plus the actual safe-area inset, with no border. Keep the existing 24px side clearance, 4px corners, supplied icons, wrapping and auto-dismissal. This supersedes the previous bottom placement and border.
+- Opening any of the three home entries scales the wallpaper smoothly from its main card to the mini preview while the sheet rises from the bottom. Close reverses the transition. Use a shared composition clone so text does not reflow mid-transition. Duration 360ms with the established easing curve; respect reduced-motion by opening/closing immediately. Clean up animation overlays after completion or interruption.

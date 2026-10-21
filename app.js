@@ -23,6 +23,7 @@
   }
   const key = 'motivation.design.v3';
   const defaults = {quote:'Let the quiet\nbring you back to yourself.',source:'AI original',align:'center',background:0};
+  let previousDesign = null, lastHome = null;
   let design = {...defaults}, favorites = [], category = 'Recommended', expanded = false, returnFocus, timer, saveTimer;
   const editor = $('#editor'), sheet = $('#sheet');
   const backgrounds = $$('.image-option img').map(img => img.getAttribute('src'));
@@ -30,12 +31,13 @@
   function storageError(message) { $('#storage-error').hidden = false; $('#storage-error').textContent = t(message); }
   try {
     const raw = localStorage.getItem(key);
-    if (raw) { const saved = JSON.parse(raw); if (!valid(saved.design) || !Array.isArray(saved.favorites) || !saved.favorites.every(valid)) throw Error('Invalid saved data'); design = saved.design; favorites = saved.favorites; }
+    if (raw) { const saved = JSON.parse(raw); if (!valid(saved.design) || !Array.isArray(saved.favorites) || !saved.favorites.every(valid)) throw Error('Invalid saved data'); previousDesign = saved.design; favorites = saved.favorites;
+      if (saved.lastHome && typeof saved.lastHome.quote === 'string' && Number.isInteger(saved.lastHome.background)) lastHome = saved.lastHome; }
   } catch { storageError('Your saved design couldn’t be restored on this device.'); }
   const signature = d => JSON.stringify([d.quote,d.source,d.align,d.background]);
   function persist() {
     clearTimeout(saveTimer);
-    try { localStorage.setItem(key, JSON.stringify({design,favorites})); $('#storage-error').hidden = true; return true; }
+    try { localStorage.setItem(key, JSON.stringify({design,favorites,lastHome})); $('#storage-error').hidden = true; return true; }
     catch { storageError('Your changes couldn’t be saved on this device.'); return false; }
   }
   let lastToast = '';
@@ -78,8 +80,45 @@
     if (focus) $('#tab-'+tab).focus();
   }
   function setExpanded(value) { expanded=value; sheet.style.height=''; sheet.classList.toggle('expanded',value); $('#handle').setAttribute('aria-expanded',String(value)); $('#handle').setAttribute('aria-label',t(value ? 'Collapse editor' : 'Expand editor')); }
-  function close() { if (editor.hidden) return; editor.hidden=true; document.body.classList.remove('editing'); $('#home').inert=false; $('.header').inert=false; document.body.style.overflow=''; persist(); returnFocus?.focus(); }
-  $$('[data-open]').forEach(el => el.addEventListener('click',() => { returnFocus=el; syncFields(); changeTab(el.dataset.open); setExpanded(false); editor.hidden=false; document.body.classList.add('editing'); $('#home').inert=true; $('.header').inert=true; document.body.style.overflow='hidden'; $('#tab-'+el.dataset.open).focus(); }));
+  let motionId = 0, motionClone = null, activeAnimations = [];
+  function clearMotion() {
+    motionId++;
+    activeAnimations.forEach(animation => animation.cancel()); activeAnimations=[];
+    motionClone?.remove(); motionClone=null;
+    $('#preview-close .wallpaper').style.visibility='';
+    editor.classList.remove('is-transitioning');
+  }
+  function transitionEditor(opening, done) {
+    clearMotion();
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches || !sheet.animate) { done(); return; }
+    const id=motionId;
+    const home=$('#home .wallpaper'), mini=$('#preview-close .wallpaper');
+    const full=home.getBoundingClientRect(), small=mini.getBoundingClientRect();
+    if (!full.width || !small.width) { done(); return; }
+    const clone=home.cloneNode(true); clone.classList.add('transition-wallpaper'); clone.setAttribute('aria-hidden','true'); clone.inert=true;
+    Object.assign(clone.style,{left:full.left+'px',top:full.top+'px',width:full.width+'px',height:full.height+'px'});
+    editor.append(clone); motionClone=clone; mini.style.visibility='hidden'; editor.classList.add('is-transitioning');
+    const miniature='translate('+(small.left-full.left)+'px,'+(small.top-full.top)+'px) scale('+(small.width/full.width)+')';
+    const options={duration:360,easing:'cubic-bezier(0.22,1,0.36,1)',fill:'both'};
+    activeAnimations=[
+      clone.animate([{transform:opening?'none':miniature},{transform:opening?miniature:'none'}],options),
+      sheet.animate([{transform:opening?'translateY(100%)':'translateY(0)'},{transform:opening?'translateY(0)':'translateY(100%)'}],options)
+    ];
+    Promise.all(activeAnimations.map(animation => animation.finished.catch(()=>{}))).then(() => {
+      if (motionId!==id) return;
+      clearMotion(); done();
+    });
+  }
+  function close(animate = true) {
+    if (editor.hidden) return;
+    const finish=() => { editor.hidden=true; document.body.classList.remove('editing'); $('#home').inert=false; $('.header').inert=false; document.body.style.overflow=''; persist(); returnFocus?.focus(); };
+    if (animate === false) { clearMotion(); finish(); } else transitionEditor(false,finish);
+  }
+  $$('[data-open]').forEach(el => el.addEventListener('click',() => {
+    returnFocus=el; syncFields(); changeTab(el.dataset.open); setExpanded(false); editor.hidden=false;
+    document.body.classList.add('editing'); $('#home').inert=true; $('.header').inert=true; document.body.style.overflow='hidden';
+    transitionEditor(true,() => $('#tab-'+el.dataset.open).focus());
+  }));
   $('#brand').addEventListener('click',() => window.scrollTo({top:0,behavior:'smooth'}));
   $('#preview-close').addEventListener('click',close);
   $('#menu').addEventListener('click',() => navigate('settings'));
@@ -228,6 +267,17 @@
     "category": "Family"
   }
 ];
+  function freshDesign(previous = previousDesign) {
+    const quoteChoices = ideas.filter(idea => idea.quote !== previous?.quote && idea.quote !== lastHome?.quote);
+    const imageChoices = backgrounds.map((_,index) => index).filter(index => index !== previous?.background && index !== lastHome?.background);
+    const quotes = quoteChoices.length ? quoteChoices : ideas;
+    const images = imageChoices.length ? imageChoices : backgrounds.map((_,index) => index);
+    const idea = quotes[Math.floor(Math.random() * quotes.length)];
+    const background = images[Math.floor(Math.random() * images.length)];
+    design = {...defaults, quote:idea.quote, source:idea.source, background};
+    lastHome = {quote:idea.quote, background};
+    category = 'Recommended';
+  }
   function renderIdeas() {
     $('#ideas-grid').replaceChildren();
     const filtered=ideas.filter(idea => category==='Recommended' || idea.category===category);
@@ -341,6 +391,24 @@
   function viewport() { if (window.visualViewport) { editor.style.setProperty('--editor-height',window.visualViewport.height+'px'); editor.style.top=window.visualViewport.offsetTop+'px'; } }
   window.visualViewport?.addEventListener('resize',viewport); window.visualViewport?.addEventListener('scroll',viewport); viewport();
   document.addEventListener('focusin',event => { if (event.target.matches('textarea')) setTimeout(() => event.target.scrollIntoView({block:'nearest'}),100); });
-  window.addEventListener('pagehide',persist);
+  let needsFreshHome = false;
+  function resumeHome() {
+    if (!needsFreshHome || document.visibilityState === 'hidden') return;
+    needsFreshHome = false;
+    const previous = {...design};
+    close(false);
+    freshDesign(previous); syncFields(); renderIdeas(); render(); persist();
+    window.history.replaceState(null, '', window.location.pathname + window.location.search);
+    renderRoute(false);
+    $('#text-limit').hidden = true;
+    clearTimeout(timer); $('#toast').classList.remove('visible');
+  }
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') { persist(); needsFreshHome = true; }
+    else resumeHome();
+  });
+  window.addEventListener('pagehide', () => { persist(); needsFreshHome = true; });
+  window.addEventListener('pageshow', event => { if (event.persisted) resumeHome(); });
+  freshDesign(); persist();
   syncFields(); renderIdeas(); render(); renderRoute(false); translateUI();
 })();

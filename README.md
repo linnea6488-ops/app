@@ -11,8 +11,9 @@ python3 -m http.server 8080 --bind 0.0.0.0
 ```
 
 Open `index.html` through that server in your browser. No build or package install
-is needed. Background images and Amiri fonts are served locally. Drafts and full
-wallpaper favorites are stored on this device, scoped to the browser origin.
+is needed. Background images and Amiri fonts are served locally. Favorites and language are stored on this device, scoped to the browser origin.
+Each new visit or return from the background shows fresh random inspiration
+and artwork. Internal navigation retains your current edits.
 
 The current implementation covers home and Image / Type / Ideas editing.
 Settings navigation, local favorite restore/removal and feedback copying are available.
@@ -37,6 +38,7 @@ Chromium at `/usr/bin/chromium` (both available in the current cloud environment
 ```sh
 python3 tests/ui_smoke.py
 python3 tests/settings_limits_smoke.py
+python3 tests/fresh_home_smoke.py
 ```
 
 This checks actual browser rendering, responsive overflow, editing, local state,

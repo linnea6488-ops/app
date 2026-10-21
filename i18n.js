@@ -812,6 +812,15 @@ window.MotivationI18n = {
       "Ginkgo op donkere steen",
       "검은 돌 위의 은행잎",
       "黒い石のイチョウ"
+    ],
+    "Every new visit starts with a new quote and background. Favorites and your language choice are kept.": [
+      "每次重新進入都會顯示新的文案與背景，收藏和語言選擇會保留。",
+      "Chaque nouvelle visite affiche un nouveau texte et un nouveau fond. Vos favoris et votre langue sont conservés.",
+      "Jeder neue Besuch beginnt mit einem neuen Text und Hintergrund. Favoriten und Sprache bleiben erhalten.",
+      "Ogni nuova visita mostra un nuovo testo e sfondo. Preferiti e lingua restano salvati.",
+      "Elk nieuw bezoek begint met nieuwe tekst en een achtergrond. Favorieten en je taalkeuze blijven bewaard.",
+      "새로 방문할 때마다 새 문구와 배경이 표시되며 즐겨찾기와 언어 설정은 유지됩니다.",
+      "再び開くたびに新しい文面と背景を表示します。お気に入りと言語設定は保持されます。"
     ]
   }
 };

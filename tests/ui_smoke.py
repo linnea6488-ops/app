@@ -32,13 +32,17 @@ with sync_playwright() as p:
   q=copy.locator('.quote').bounding_box();s=copy.locator('.source').bounding_box()
   if q and s: assert q['y']+q['height']<=s['y']
  page.keyboard.press('Escape')
- assert page.locator('[data-open="type"]').evaluate('(el)=>el===document.activeElement')
- page.wait_for_timeout(250); page.reload(wait_until='networkidle')
+ expect(page.locator('[data-open="type"]')).to_be_focused()
+ page.wait_for_timeout(250)
  assert page.locator('#home .quote').inner_text()==quote
  page.locator('#favorite').click()
  assert page.locator('#favorite').get_attribute('aria-pressed')=='true'
+ saved_quote=page.locator('#home .quote').inner_text()
+ saved_image=page.locator('#home .wallpaper-image').get_attribute('src')
  page.reload(wait_until='networkidle')
- assert page.locator('#favorite').get_attribute('aria-pressed')=='true'
+ assert page.locator('#home .quote').inner_text()!=saved_quote
+ assert page.locator('#home .wallpaper-image').get_attribute('src')!=saved_image
+ assert page.locator('#favorite').get_attribute('aria-pressed')=='false'
  page.locator('[data-open="image"]').click()
  page.locator('[data-background="2"]').click()
  assert page.locator('[data-background="2"]').get_attribute('aria-pressed')=='true'
@@ -48,7 +52,7 @@ with sync_playwright() as p:
  assert page.locator('.idea').count()==3
  page.locator('.idea').first.click()
  assert page.locator('[data-background="2"]').get_attribute('aria-pressed')=='true'
- assert page.locator('[data-align="left"]').get_attribute('aria-pressed')=='true'
+ assert page.locator('[data-align="center"]').get_attribute('aria-pressed')=='true'
  page.get_by_role('button',name='Love',exact=True).click()
  assert page.locator('.idea').count()==3
  assert not page.locator('#ideas-empty').is_visible()
@@ -91,9 +95,10 @@ with sync_playwright() as p:
    assert abs(rect['x']-img['x'])<1 and abs(rect['y']-img['y'])<1
  page.keyboard.press('Escape')
  page.locator('[data-open="image"]').click()
+ page.locator('#editor:not(.is-transitioning)').wait_for()
  box=page.locator('#handle').bounding_box();x=box['x']+65;y=box['y']+22
  page.mouse.move(x,y);page.mouse.down();page.mouse.move(x,y+100,steps=8);page.mouse.up()
- assert page.locator('#editor').is_hidden()
+ expect(page.locator('#editor')).to_be_hidden()
  # Settings navigation, full-design favorites, language preference and truthful feedback.
  page.locator('#menu').click()
  page.locator('[data-settings="favorites"]').click()
@@ -103,7 +108,7 @@ with sync_playwright() as p:
  page.screenshot(path='/tmp/motivation-review/favorites.png')
  page.locator('.favorite-restore').click()
  assert page.locator('#home .quote').inner_text()==quote
- assert page.locator('#editor').is_hidden()
+ expect(page.locator('#editor')).to_be_hidden()
  page.locator('#menu').click()
  page.screenshot(path='/tmp/motivation-review/settings.png')
  page.locator('[data-settings="favorites"]').click()
@@ -136,5 +141,5 @@ with sync_playwright() as p:
  assert denied.locator('#storage-error').is_visible()
  assert 'couldn’t be saved' in denied.locator('#toast').inner_text()
  denied.close()
- print(json.dumps({'result':'passed','widths':[320,375,390,430],'checks':['layout overflow','placeholder copy','long quote attribution','reload persistence','full-design favorite persistence','background selection','idea filtering and retained layout','populated AI quote categories','pointer drag','tab snap preservation','focus return and trap','truthful export status','empty preview','background geometry','downward dismiss','storage failure rollback','no simulated status gap','expanded sheet top','sticky tabs','specified placeholder and entered text color','no close icon or AI heading','settings navigation','favorite restore and removal','language preference','feedback failure handling'],'pageErrors':errors}))
+ print(json.dumps({'result':'passed','widths':[320,375,390,430],'checks':['layout overflow','placeholder copy','long quote attribution','fresh inspiration on reload','full-design favorite persistence','background selection','idea filtering and retained layout','populated AI quote categories','pointer drag','tab snap preservation','focus return and trap','truthful export status','empty preview','background geometry','downward dismiss','storage failure rollback','no simulated status gap','expanded sheet top','sticky tabs','specified placeholder and entered text color','no close icon or AI heading','settings navigation','favorite restore and removal','language preference','feedback failure handling'],'pageErrors':errors}))
  browser.close()

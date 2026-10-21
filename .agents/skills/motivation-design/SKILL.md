@@ -22,7 +22,7 @@ The latest explicit user instructions take precedence. If requirements change, u
 - Keep the app shell light. Prefer dark, artistic, solitary, literary and atmospheric built-in wallpaper imagery. Do not add uploads or unrelated visual styles.
 - Quote editing includes quote, optional source and alignment. Do not add font, size or color controls unless requested.
 - Ideas combine a built-in library with real AI generation. Applying an idea changes quote and source only.
-- Favorites store the complete wallpaper locally. Auto-save the current design on this device. No login, cross-device sync, subscriptions, undo/redo or separate editable-works library.
+- Favorites store the complete wallpaper locally. Keep edits during the current visit, but show fresh random inspiration and artwork when the user re-enters; favorites and language remain stored. No login, cross-device sync, subscriptions, undo/redo or separate editable-works library.
 - Save exports a high-resolution image; Share shares the image. Final export ratio and resolution are explicitly deferred. Do not silently decide them.
 - Menu scope is Language, Favorites, Feedback, version information and Privacy Policy. Omit the deferred “用户didi” item. Eight interface languages, a clearly marked fictitious feedback address and demo privacy text are now confirmed; see the latest reference.
 - Settings pages are now explicitly authorized. Reuse the established visual system; use the latest confirmed eight-language options, placeholder-only feedback address, Demo 0.1 privacy notice and fixed-size input limits in the reference.
@@ -54,3 +54,5 @@ See the reference for complete tokens, measurements, component contracts and acc
 User-confirmed UI revision: no simulated iOS status-area spacer, no visible sheet close icon, and no “Original words · AI-created” heading. See the latest reference section for screenshot geometry and input color. Use the latest supplied icon assets documented in the reference.
 
 The latest supplied entry icons render at their original 39×39 (Typography) and 42×42 (Inspiration) dimensions, with internal whitespace preserved and aligned layout slots. Toasts use the supplied success/reminder SVGs and the latest 24px side-clearance specification.
+
+Latest user direction: top, borderless toasts; opening editor entries scales the wallpaper down and slides the sheet up, reversing on close and respecting reduced motion. See the latest reference for lifecycle and animation details.
