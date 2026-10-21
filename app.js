@@ -79,7 +79,7 @@
     $('#sheet-content').scrollTop = 0;
     if (focus) $('#tab-'+tab).focus();
   }
-  function setExpanded(value) { expanded=value; sheet.style.height=''; sheet.classList.toggle('expanded',value); $('#handle').setAttribute('aria-expanded',String(value)); $('#handle').setAttribute('aria-label',t(value ? 'Collapse editor' : 'Expand editor')); }
+  function setExpanded(value) { expanded=value; sheet.style.height=''; sheet.classList.toggle('expanded',value); $('#handle').setAttribute('aria-expanded',String(value)); $('#handle').setAttribute('aria-label',t(value ? 'Close editor and return home' : 'Expand editor')); }
   let motionId = 0, motionClone = null, activeAnimations = [];
   function clearMotion() {
     motionId++;
@@ -111,6 +111,7 @@
   }
   function close(animate = true) {
     if (editor.hidden) return;
+    if (editor.contains(document.activeElement)) document.activeElement.blur();
     const finish=() => { editor.hidden=true; document.body.classList.remove('editing'); $('#home').inert=false; $('.header').inert=false; document.body.style.overflow=''; persist(); returnFocus?.focus(); };
     if (animate === false) { clearMotion(); finish(); } else transitionEditor(false,finish);
   }
@@ -392,7 +393,7 @@
   window.addEventListener('hashchange', () => renderRoute());
   window.addEventListener('popstate', () => renderRoute());
   let drag=null, suppressClick=false;
-  $('#handle').addEventListener('click',() => { if (suppressClick) { suppressClick=false; return; } setExpanded(!expanded); });
+  $('#handle').addEventListener('click',() => { if (suppressClick) { suppressClick=false; return; } if (expanded) close(); else setExpanded(true); });
   $('#handle').addEventListener('pointerdown',event => { if (event.button!==0) return; suppressClick=false; drag={y:event.clientY,height:sheet.getBoundingClientRect().height,expanded}; event.currentTarget.setPointerCapture(event.pointerId); });
   $('#handle').addEventListener('pointermove',event => {
     if (!drag) return; const dy=event.clientY-drag.y;
@@ -401,8 +402,8 @@
   $('#handle').addEventListener('pointerup',event => {
     if (!drag) return; const dy=event.clientY-drag.y, wasExpanded=drag.expanded; drag=null; sheet.classList.remove('dragging');
     if (!suppressClick) return;
-    if (dy>70 && !wasExpanded) close();
-    setExpanded(dy < -50 ? true : dy>50 ? false : wasExpanded);
+    if (dy > (wasExpanded ? 50 : 70)) { close(); return; }
+    setExpanded(dy < -50 ? true : wasExpanded);
   });
   $('#handle').addEventListener('pointercancel',() => { drag=null; suppressClick=false; sheet.classList.remove('dragging'); setExpanded(expanded); });
   document.addEventListener('keydown',event => {
@@ -417,7 +418,12 @@
   });
   function viewport() { if (window.visualViewport) { editor.style.setProperty('--editor-height',window.visualViewport.height+'px'); editor.style.top=window.visualViewport.offsetTop+'px'; } }
   window.visualViewport?.addEventListener('resize',viewport); window.visualViewport?.addEventListener('scroll',viewport); viewport();
-  document.addEventListener('focusin',event => { if (event.target.matches('textarea')) setTimeout(() => event.target.scrollIntoView({block:'nearest'}),100); });
+  document.addEventListener('focusin',event => {
+    if (event.target.matches('#quote-input,#source-input') && !editor.hidden) setExpanded(true);
+    if (event.target.matches('textarea')) setTimeout(() => {
+      if (document.activeElement===event.target) event.target.scrollIntoView({block:'nearest'});
+    },100);
+  });
   let needsFreshHome = false;
   function resumeHome() {
     if (!needsFreshHome || document.visibilityState === 'hidden') return;

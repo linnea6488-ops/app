@@ -24,7 +24,6 @@ with sync_playwright() as p:
  page.locator('#quote-input').fill(quote)
  page.locator('#source-input').fill('Your own words')
  page.get_by_role('button',name='Align left',exact=True).click()
- page.locator('#handle').click()
  page.wait_for_timeout(300)
  assert page.locator('#handle').get_attribute('aria-expanded')=='true'
  page.screenshot(path='/tmp/motivation-review/type.png')

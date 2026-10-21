@@ -199,3 +199,8 @@ Use success only after persistence or copying actually succeeds. Input limits, u
 - Pack the ideas into two independently flowing columns, placing successive ideas alternately left/right. Each column has a strict 10px vertical gap; a taller card must not create extra blank space below its shorter neighbor.
 - Newly selected/generated built-in designs have no prefilled Source. Source shows the localized “Enter an author or source…” placeholder until the user writes one. Source placeholder and value use #C4BFBA, matching Quote. AI-original labels remain localized on inspiration cards; they are not inserted as the user’s attribution.
 - Remove the rectangular focus outline from Image/Type/Ideas tabs, including programmatic touch focus. Preserve selection underlines and a text-underline keyboard-focus cue. Other controls retain visible focus styles.
+
+
+## Input focus and full sheet dismissal (2026-10-21)
+
+Focusing either Quote or Source raises the sheet to its highest position before scrolling the focused field into view. Feedback-page input does not expand the editor sheet. On a deliberate downward handle gesture from the highest position, fully dismiss the editor instead of snapping to the intermediate height. A short accidental movement returns to the highest snap. Clicking the handle while expanded also dismisses it; clicking from standard height still expands it. Blur editor input when dismissing so keyboard focus is released, preserve the edited design within the visit, and retain the reverse wallpaper/sheet animation.

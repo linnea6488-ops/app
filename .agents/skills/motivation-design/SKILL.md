@@ -58,3 +58,5 @@ The latest supplied entry icons render at their original 39×39 (Typography) and
 Latest user direction: top, borderless toasts; opening editor entries scales the wallpaper down and slides the sheet up, reversing on close and respecting reduced motion. See the latest reference for lifecycle and animation details.
 
 Built-in ideas follow all eight selected languages throughout home, preview and Type. Preserve custom text verbatim. Use stable built-in IDs, natural wrapping without injected newlines, 10px independent-column idea spacing, and no rectangular tab focus outline.
+
+Quote/Source focus must fully expand the editor. A deliberate downward handle dismissal from the expanded state closes completely, as does clicking the expanded handle; do not stop at the intermediate height. Release input focus on dismissal.
