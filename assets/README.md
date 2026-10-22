@@ -42,3 +42,5 @@ Original PNGs are retained in the workspace’s generated_images directory. The
 served JPEGs are same-size browser encodings (quality 85), without cropping,
 recoloring or content changes. The nine served files total about 1.8 MB.
 `prepare_backgrounds.py` accepts a JSON array of {name, path} original PNG sources.
+
+- `icons/favorites-empty.png`: user-uploaded `m_ic_pop_favorites.png.zip` illustration, preserved unchanged (480×453), exclusively for the Favorites empty state.

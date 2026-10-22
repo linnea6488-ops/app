@@ -21,6 +21,7 @@ window.MotivationI18n = {
     "日本語"
   ],
   "messages": {
+    "Refresh inspiration": ["更換靈感", "Renouveler l’inspiration", "Inspiration erneuern", "Rinnova l’ispirazione", "Inspiratie vernieuwen", "영감 새로고침", "インスピレーションを更新"],
     "Settings": [
       "設定",
       "Réglages",

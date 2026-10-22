@@ -11,7 +11,7 @@ with sync_playwright() as p:
  page.locator('#tab-type').click()
  assert page.locator('#quote-input').input_value()=='Home is made in the ways we care.'
  assert '\n' not in page.locator('#quote-input').input_value()
- assert page.locator('#source-input').input_value()==''
+ assert page.locator('#source-input').input_value()=='AI original'
  assert page.locator('#source-input').get_attribute('placeholder')=='Enter an author or source…'
  assert page.locator('#source-input').evaluate('(el)=>getComputedStyle(el,"::placeholder").color')=='rgb(196, 191, 186)'
  page.screenshot(path='/tmp/motivation-review/type-placeholder.png')
@@ -46,5 +46,5 @@ with sync_playwright() as p:
  page.keyboard.press('Escape');page.locator('#menu').click();page.locator('[data-settings="language"]').click();page.locator('[data-language="en"]').click();page.locator('#detail-back').click();page.locator('#settings-back').click()
  assert page.locator('#home .quote').text_content()=='My own first line.\nMy own second line.'
  assert errors==[],errors
- print('PASS: 8-language built-in quote sync, preserved custom copy/source, natural input wrapping, empty Source guidance, 10px masonry gaps and no tab focus box.')
+ print('PASS: 8-language built-in quote sync, preserved custom copy/source, natural input wrapping, built-in attribution and Source guidance, 10px masonry gaps and no tab focus box.')
  b.close()

@@ -28,4 +28,7 @@ body.editing #home{visibility:hidden}
 
 .editor:focus,.editor:focus-visible{outline:none;box-shadow:none}
 
-.entries{margin-top:9px}.preview-backdrop{align-items:flex-start}
+.entries{margin-top:18px}.preview-backdrop{align-items:flex-start}
+
+/* Confirmed header spacing and Favorites empty state. */
+.header{margin-bottom:8px}.header-actions{display:flex;align-items:center;gap:0}.preview-backdrop{top:calc(60px + env(safe-area-inset-top));height:calc(41% - 60px - env(safe-area-inset-top))}.empty-state h2{margin-bottom:6px}.favorites-empty-icon{display:block;width:160px;height:auto;object-fit:contain;margin:0 auto 24px}

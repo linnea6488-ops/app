@@ -5,12 +5,29 @@ with sync_playwright() as p:
  errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
  page.goto('http://127.0.0.1:8080',wait_until='networkidle')
  expect(page.locator('[data-background]')).to_have_count(21)
+ expect(page.locator('#share')).to_have_count(0)
+ expect(page.locator('#home .source')).to_have_text('AI original')
+ for _ in range(6):
+  before=page.locator('#home .quote').text_content(),page.locator('#home .wallpaper-image').get_attribute('src')
+  page.locator('#refresh').tap()
+  after=page.locator('#home .quote').text_content(),page.locator('#home .wallpaper-image').get_attribute('src')
+  assert before[0]!=after[0] and before[1]!=after[1]
+  expect(page.locator('#home .source')).to_have_text('AI original')
+ favorite=page.locator('#favorite').bounding_box();wall=page.locator('#home .wallpaper').bounding_box()
+ assert abs(wall['x']+wall['width']-favorite['x']-favorite['width']-18)<1
+ page.locator('#menu').tap();page.locator('[data-settings="favorites"]').tap()
+ expect(page.locator('.favorites-empty-icon')).to_be_visible()
+ assert page.locator('.favorites-empty-icon').evaluate('(el)=>el.complete && el.naturalWidth===480')
+ assert page.locator('.empty-state h2').evaluate('(el)=>getComputedStyle(el).marginBottom')=='6px'
+ page.locator('#detail-back').tap();page.locator('#settings-back').tap()
+
  assert page.get_by_text('Choose a background for your words.',exact=True).count()==0
  for width in [320,375,390,430]:
   page.set_viewport_size({'width':width,'height':844})
+  assert page.locator('.header').evaluate('(el)=>getComputedStyle(el).marginBottom')=='8px'
   home=page.locator('#home .wallpaper').bounding_box()
   entries=page.locator('.entries').bounding_box()
-  assert abs(entries['y']-(home['y']+home['height'])-9)<1
+  assert abs(entries['y']-(home['y']+home['height'])-18)<1
   for tab in ['image','type','ideas']:
    page.locator('[data-open="'+tab+'"]').tap();page.locator('#editor:not(.is-transitioning)').wait_for()
    mini=page.locator('#preview-close .wallpaper').bounding_box()
@@ -32,5 +49,5 @@ with sync_playwright() as p:
  page.locator('#sheet-content').evaluate('(el)=>el.scrollTop=el.scrollHeight')
  page.screenshot(path='/tmp/motivation-review/new-backgrounds.png')
  assert errors==[],errors
- print('PASS: 21 backgrounds; all 9 new assets load; 9px home gap; matching preview top at 320–430px; identical placeholders; touch-down fully expands inputs.')
+ print('PASS: 21 backgrounds; all 9 new assets load; 18px home gap; matching preview top at 320–430px; identical placeholders; touch-down fully expands inputs.')
  browser.close()

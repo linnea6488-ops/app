@@ -224,3 +224,10 @@ Use the user-supplied black-and-white 编组.svg as the Motivation home-screen i
 - Begin expansion on Quote/Source pointer-down, before Safari opens the keyboard; retain focus-based expansion for keyboard/assistive input.
 - Align the top edge of the mini wallpaper with the top edge of the main wallpaper at rest, with no extra centering offset. Preserve the existing shrinking-card transition.
 - Halve the gap between wallpaper and the three home entry cards from 18px to 9px. The gap between entry cards and Save stays unchanged.
+
+## Confirmed home corrections (2026-10-22)
+- Header-to-wallpaper gap is 8px (previously16); wallpaper-to-three-entries is18px, not9. Mini preview matches the same card top.
+- Remove Share. The existing bookmark is the sole bottom-right wallpaper action, retaining its44px target and18px inset.
+- Refresh sits immediately left of More, randomizes both background and idea excluding previous selections, retains favorites/language.
+- Built-in ideas display their localized AI original attribution on home, mini preview and Type; manual source edits remain literal. Empty inputs retain their guidance.
+- Uploaded m_ic_pop_favorites.png is exclusively the Favorites empty-state illustration, preserved byte-for-byte and displayed160px wide at its original480:453 aspect ratio. Empty-state title/subtitle gap is6px.

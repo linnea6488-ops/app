@@ -127,7 +127,10 @@
   $('#preview-close').addEventListener('click',close);
   $('#menu').addEventListener('click',() => navigate('settings'));
   $('#save').addEventListener('click',() => toast('Saving images isn’t enabled in this demo yet.'));
-  $('#share').addEventListener('click',() => toast('System sharing isn’t enabled in this demo yet.'));
+  $('#refresh').addEventListener('click',() => {
+    freshDesign({...design}); normalizeDesign(); syncFields(); renderIdeas(); render(); persist();
+    $('#text-limit').hidden=true;
+  });
   $('#favorite').addEventListener('click',() => {
     const previous=favorites.slice(); const index=favorites.findIndex(d => signature(d) === signature(design));
     if (index < 0) favorites.push({...design}); else favorites.splice(index,1);
@@ -302,7 +305,7 @@
     const images = imageChoices.length ? imageChoices : backgrounds.map((_,index) => index);
     const idea = localizedIdea(quotes[Math.floor(Math.random() * quotes.length)]);
     const background = images[Math.floor(Math.random() * images.length)];
-    design = {...defaults, quote:idea.quote, source:'', ideaId:idea.id, sourceIsBuiltIn:false, background};
+    design = {...defaults, quote:idea.quote, source:idea.source, ideaId:idea.id, sourceIsBuiltIn:true, background};
     lastHome = {quote:idea.quote, ideaId:idea.id, background};
     category = 'Recommended';
   }
@@ -314,10 +317,10 @@
     columns.forEach(el => {el.className='idea-column';$('#ideas-grid').append(el);});
     filtered.forEach((base,index) => {
       const idea=localizedIdea(base);
-      const button=document.createElement('button'); button.type='button'; button.className='idea'; button.dataset.quote=idea.quote; button.dataset.source=''; button.dataset.ideaId=idea.id;
+      const button=document.createElement('button'); button.type='button'; button.className='idea'; button.dataset.quote=idea.quote; button.dataset.source=idea.source; button.dataset.ideaId=idea.id;
       const text=document.createElement('span'); text.textContent=idea.quote;
       const source=document.createElement('span'); source.className='idea-source'; source.textContent=idea.source;
-      button.append(text,source); button.addEventListener('click',() => { design.quote=idea.quote; design.source=''; design.ideaId=idea.id; design.sourceIsBuiltIn=false; syncFields(); render(); persist(); });
+      button.append(text,source); button.addEventListener('click',() => { design.quote=idea.quote; design.source=idea.source; design.ideaId=idea.id; design.sourceIsBuiltIn=true; syncFields(); render(); persist(); });
       columns[index%2].append(button);
     });
     $$('[data-category]').forEach(el => el.setAttribute('aria-pressed',String(el.dataset.category===category))); render();
