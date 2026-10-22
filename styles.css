@@ -44,3 +44,6 @@ body.editing.editing-type .preview-backdrop{top:calc(24px + env(safe-area-inset-
 body.editing.editing-type .mini-preview{height:100%;width:auto;max-height:none;max-width:calc(100% - 48px);aspect-ratio:342/486}body.editing.editing-type .mini-preview .wallpaper{height:100%}
 
 body.editing.editing-type .preview-backdrop{padding:0}
+
+/* Size from the sheet’s measured position, preserving the full wallpaper ratio. */
+body.editing.editing-type .preview-backdrop{height:var(--type-preview-height,0px)}body.editing.editing-type .mini-preview{width:var(--type-preview-width,0px);height:var(--type-preview-height,0px);max-width:none;flex:none}
