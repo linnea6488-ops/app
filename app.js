@@ -437,19 +437,29 @@
   window.addEventListener('hashchange', () => renderRoute());
   window.addEventListener('popstate', () => renderRoute());
   let drag=null, suppressClick=false;
-  $('#handle').addEventListener('click',() => { if (suppressClick) { suppressClick=false; return; } if (expanded) close(); else setExpanded(true); });
-  $('#handle').addEventListener('pointerdown',event => { if (event.button!==0) return; suppressClick=false; drag={y:event.clientY,height:sheet.getBoundingClientRect().height,expanded}; event.currentTarget.setPointerCapture(event.pointerId); });
-  $('#handle').addEventListener('pointermove',event => {
+  sheet.addEventListener('click',event => {
+    if (!suppressClick) return;
+    event.preventDefault(); event.stopPropagation(); suppressClick=false;
+  },true);
+  $('#handle').addEventListener('click',() => { if (expanded) close(); else setExpanded(true); });
+  sheet.addEventListener('pointerdown',event => {
+    if (event.button!==0 || !event.target.closest('.sheet-heading,.tabs')) return;
+    suppressClick=false;
+    drag={y:event.clientY,height:sheet.getBoundingClientRect().height,expanded};
+    event.target.setPointerCapture(event.pointerId);
+  });
+  sheet.addEventListener('pointermove',event => {
     if (!drag) return; const dy=event.clientY-drag.y;
     if (Math.abs(dy)>8) { suppressClick=true; sheet.classList.add('dragging'); const max=editor.clientHeight-parseFloat(getComputedStyle($('.app')).paddingTop)-20; sheet.style.height=Math.max(120,Math.min(max,drag.height-dy))+'px'; }
   });
-  $('#handle').addEventListener('pointerup',event => {
+  sheet.addEventListener('pointerup',event => {
     if (!drag) return; const dy=event.clientY-drag.y, wasExpanded=drag.expanded; drag=null; sheet.classList.remove('dragging');
     if (!suppressClick) return;
+    setTimeout(() => suppressClick=false,0);
     if (dy > (wasExpanded ? 50 : 70)) { close(); return; }
     setExpanded(dy < -50 ? true : wasExpanded);
   });
-  $('#handle').addEventListener('pointercancel',() => { drag=null; suppressClick=false; sheet.classList.remove('dragging'); setExpanded(expanded); });
+  sheet.addEventListener('pointercancel',() => { drag=null; suppressClick=false; sheet.classList.remove('dragging'); setExpanded(expanded); });
   document.addEventListener('keydown',event => {
     if (editor.hidden) return;
     if (event.key==='Escape') { event.preventDefault(); close(); }
