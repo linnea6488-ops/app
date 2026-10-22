@@ -64,3 +64,5 @@ Quote/Source focus must fully expand the editor. A deliberate downward handle di
 Latest layout: omit background helper copy, keep mini-preview top aligned to the main card, use an 8px header-to-wallpaper gap and18px wallpaper-to-entry gap, and expand on input pointer-down as well as focus. Gallery now has 12 supplied images plus nine explicitly requested AI-generated rich-color backgrounds.
 
 Latest corrections: remove Share, retain bottom-right bookmark, refresh both idea/artwork from header, restore built-in localized attribution. Supplied PNG is exclusively the Favorites empty-state illustration; title/subtitle gap6px.
+
+Latest Type revision: actual entered Quote/Source use primary ink, placeholders stay light. Hide header and raise mini preview while Type is selected. Favorites empty title/subtitle gap3px and subtitle15px; remove via bookmark overlay, not text. Header refresh28px and menu strokes24px.

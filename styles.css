@@ -32,3 +32,8 @@ body.editing #home{visibility:hidden}
 
 /* Confirmed header spacing and Favorites empty state. */
 .header{margin-bottom:8px}.header-actions{display:flex;align-items:center;gap:0}.preview-backdrop{top:calc(60px + env(safe-area-inset-top));height:calc(41% - 60px - env(safe-area-inset-top))}.empty-state h2{margin-bottom:6px}.favorites-empty-icon{display:block;width:160px;height:auto;object-fit:contain;margin:0 auto 24px}
+
+/* Larger header symbols, icon-only saved wallpaper actions, Type editing state. */
+.menu{gap:6px}.menu span{width:24px;height:1.6px}.empty-state h2{margin-bottom:3px}.empty-state p{font-size:15px}.favorite-item{position:relative}.favorite-remove{position:absolute;right:10px;bottom:10px;padding:0;text-decoration:none}.favorite-remove[aria-pressed=true] svg path{fill:var(--ink)}
+#quote-input,#source-input{color:var(--ink)}#quote-input::placeholder,#source-input::placeholder{color:#C4BFBA}
+body.editing.editing-type .header{visibility:hidden}body.editing.editing-type .preview-backdrop{top:env(safe-area-inset-top);height:calc(41% - env(safe-area-inset-top))}

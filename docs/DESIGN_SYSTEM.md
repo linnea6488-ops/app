@@ -231,3 +231,9 @@ Use the user-supplied black-and-white 编组.svg as the Motivation home-screen i
 - Refresh sits immediately left of More, randomizes both background and idea excluding previous selections, retains favorites/language.
 - Built-in ideas display their localized AI original attribution on home, mini preview and Type; manual source edits remain literal. Empty inputs retain their guidance.
 - Uploaded m_ic_pop_favorites.png is exclusively the Favorites empty-state illustration, preserved byte-for-byte and displayed160px wide at its original480:453 aspect ratio. Empty-state title/subtitle gap is6px.
+
+## Header, saved wallpapers and Type refinement (2026-10-22)
+- Refresh uses a joined arc/arrow at28px; More strokes are24px wide, both retain44px hit targets.
+- Favorites empty title/subtitle gap3px and subtitle15px. Saved wallpaper removal is a filled bookmark circle overlaid bottom-right, using the home symbol and no visible Remove label.
+- Quote and Source entered values use primary ink #1A1918; native placeholders remain #C4BFBA and disappear when values exist. Existing wallpaper content is real text, not a placeholder, and is not silently deleted.
+- Type hides app header and raises mini wallpaper to safe-area top. Switching to Image/Ideas restores their established header/preview position; closing restores home.

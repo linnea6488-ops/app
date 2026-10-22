@@ -252,3 +252,12 @@
 - 上传ZIP只读取其中m_ic_pop_favorites.png，原样存assets/icons/favorites-empty.png，480×453；用于设置→我的收藏空状态，非首页收藏图标。显示160px宽、自动高度，保留比例和留白。标题/副标题12→6px。
 - mobile_layout_smoke通过：连续6次刷新均同时更新两项、署名显示、无分享按钮、书签右侧18px、PNG加载及空态6px、320/375/390/430间距与预览顶部一致、21张背景加载、输入最高展开。ideas_layout_smoke通过八语与自定义署名保留。node语法与git diff检查通过。
 - 更新规范/Skill及单文件预览。真实iPhone Safari和远端Pages部署未独立验证。
+
+## 图标、收藏和Type细调（2026-10-22）
+- 重画刷新图标为连接圆弧与转角箭头，图形28px；更多横线放大至24px，点击区域仍44px。
+- 收藏空状态主副标题间距6→3px，副标题14→15px。取消收藏改为每张壁纸右下方实心书签圆按钮，复用首页SVG，无Remove文字；保留可访问名称和原有存储失败反馈。
+- Quote/Source实际值为#1A1918，原生placeholder保持#C4BFBA；不静默清空用户已有文案。
+- Type选中时隐藏顶部标题/刷新/更多，mini预览移到safe-area顶部。切回其他标签恢复原顶部位置，关闭恢复首页；visibility保留首页几何供反向动画使用。
+- 已同步规范与Skill，原始图片/空状态配图不变。
+
+- 本轮实际浏览器检查通过320/375/390/430下Type导航隐藏/预览top0、输入placeholder消失/黑色值、切标签与关闭恢复、图标取消收藏、3px/15px空态；settings_limits_smoke也通过八语、反馈、Unicode/IME和边界。仍未声称完成真实Safari或Pages部署确认。

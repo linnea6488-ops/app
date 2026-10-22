@@ -75,6 +75,7 @@
   }
   function syncFields() { $('#quote-input').value = design.quote; $('#source-input').value = design.source; }
   function changeTab(tab, focus = false) {
+    document.body.classList.toggle('editing-type',tab === 'type');
     $$('[data-tab]').forEach(el => { const active = el.dataset.tab === tab; el.setAttribute('aria-selected',String(active)); el.tabIndex = active ? 0 : -1; $('#panel-'+el.dataset.tab).hidden = !active; });
     $('#sheet-content').scrollTop = 0;
     if (focus) $('#tab-'+tab).focus();
@@ -112,7 +113,7 @@
   function close(animate = true) {
     if (editor.hidden) return;
     if (editor.contains(document.activeElement)) document.activeElement.blur();
-    const finish=() => { editor.hidden=true; document.body.classList.remove('editing'); $('#home').inert=false; $('.header').inert=false; document.body.style.overflow=''; persist(); returnFocus?.focus(); };
+    const finish=() => { editor.hidden=true; document.body.classList.remove('editing','editing-type'); $('#home').inert=false; $('.header').inert=false; document.body.style.overflow=''; persist(); returnFocus?.focus(); };
     if (animate === false) { clearMotion(); finish(); } else transitionEditor(false,finish);
   }
   $$('[data-open]').forEach(el => el.addEventListener('click',() => {
@@ -341,7 +342,8 @@
       const wallpaper = $('#home .wallpaper').cloneNode(true);
       paint(wallpaper, saved); restore.append(wallpaper);
       restore.addEventListener('click', () => { design = {...saved}; normalizeDesign(); syncFields(); render(); persist(); navigate(); });
-      const remove = document.createElement('button'); remove.type = 'button'; remove.className = 'favorite-remove'; remove.textContent = t('Remove');
+      const remove = document.createElement('button'); remove.type = 'button'; remove.className = 'favorite-remove circle'; remove.innerHTML = $('#favorite').innerHTML;
+      remove.setAttribute('aria-pressed','true');
       remove.setAttribute('aria-label', t('Remove wallpaper') + ': ' + saved.quote);
       remove.addEventListener('click', () => {
         const previous = favorites.slice(); favorites.splice(index, 1);
