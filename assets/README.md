@@ -24,3 +24,11 @@ Files are byte-for-byte copies of the uploads, without cropping or recoloring:
 - icons/inspiration.svg ← Group 29.svg (42×42)
 - icons/toast-info.svg ← Group 24.svg (28×28)
 - icons/toast-success.svg ← Group 24 (1).svg (28×28)
+
+## Home-screen icon
+
+`icons/app-icon.svg` is an unchanged byte-for-byte copy of the uploaded 编组.svg
+(512×512 black canvas). The 180px Apple touch icon and 192/512px manifest PNGs
+are browser rasterizations of that complete canvas, without recropping, recoloring
+or added rounded corners. iOS applies its own icon mask. Rebuild with
+`python3 scripts/render_app_icons.py` in the prepared development environment.

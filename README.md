@@ -70,3 +70,12 @@ in this clickable demo.
 
 Build the optional portable review file with `python3 scripts/build_preview.py`.
 The generated HTML is ignored by Git to avoid duplicating the artwork.
+
+## Add to an iPhone home screen
+
+Open the published HTTPS site in Safari, then choose Share → Add to Home Screen.
+Keep the name Motivation and enable Open as Web App if that option is shown.
+The website includes the supplied black-and-white home icon, an Apple touch icon,
+and a manifest with standalone launch configuration under the `/app/` project path.
+Installation on a real iPhone still requires manual verification. No offline
+service worker is included.

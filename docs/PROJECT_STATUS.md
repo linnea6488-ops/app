@@ -223,3 +223,12 @@
 - 新建触屏模拟浏览器上下文分别检查Image/Type/Ideas首次和再次打开：焦点为dialog，tab及容器outline-style为none；键盘箭头仍可操作。
 - 环境未安装WebKit，未声称已做真实iPhone Safari测试。
 - 页面JS/CSS版本升为20261021-9。该修复单独发布；本地PWA配置和图标待附件的工作保持未提交，不混入本次页面发布。
+
+## iPhone 主屏幕图标配置已完成（2026-10-22）
+
+- 用户已以文件附件上传 编组.svg（512×512，内含黑底）。已原样保存为 assets/icons/app-icon.svg，字节一致，未重绘/裁切/改色。
+- 通过浏览器按完整画板渲染 apple-touch-icon.png 180×180，以及manifest用192/512 PNG，保持原始黑底与留白。可用 scripts/render_app_icons.py 重建。
+- app.webmanifest 配置 Motivation、相对 ./ 启动与scope、standalone、米白主题和完整PNG图标。index已接入manifest、iOS standalone元数据、apple-touch-icon和SVG favicon。
+- 已验证 /app/ 子路径（对应GitHub Pages项目路径）下manifest解析无错误，所有图标URL返回200且PNG尺寸正确，iOS元数据正确，编辑入口正常。尚未在真实iPhone主屏幕安装验证。
+- 不包含离线缓存/Service Worker，不宣称离线支持。桌面添加由用户在Safari分享菜单手动完成。
+- 本节取代此前“PWA配置待图标附件”的状态；这次将完整配置与图标一起提交推送。

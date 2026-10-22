@@ -209,3 +209,8 @@ Focusing either Quote or Source raises the sheet to its highest position before 
 ## First-open tab focus correction (2026-10-21)
 
 Initial editor entry must not programmatically focus Image/Type/Ideas after the animation. Focus the neutral dialog container synchronously in the entry gesture, with no outline on the container. Keyboard users can still reach the tab list and use arrow navigation. Keep tab focus styling free of rectangular outlines. Test first and subsequent opens in fresh touch-enabled browser contexts, not only repeat clicks within one visit.
+
+
+## Confirmed home-screen identity (2026-10-22)
+
+Use the user-supplied black-and-white 编组.svg as the Motivation home-screen icon. Preserve the complete 512×512 square, black background, shapes and internal whitespace. Supply a 180px Apple touch PNG and 192/512px manifest PNGs rendered from the unmodified SVG; let the OS apply corner masking. Home-screen title is Motivation, with standalone launch and the existing ivory app theme. This adds install metadata only, not offline behavior or a new in-app installation flow.
