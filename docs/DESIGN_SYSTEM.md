@@ -241,3 +241,5 @@ Use the user-supplied black-and-white 编组.svg as the Motivation home-screen i
 ## Custom field guidance correction (2026-10-22)
 - Quote and Source show “Add your custom text / quote” when not customized, placeholder #C4BFBA; do not prefill built-in quote/AI attribution as editable field values. Wallpaper retains its built-in content until an actual edit. Custom field values use #1A1918 and remain when reopening within the visit. Guidance localizes in all eight languages.
 - Type explicitly hides header visually and from accessibility; switching away/closing restores it. Refresh icon increases28→30px.
+
+- Refresh icon remains30px but stroke is exactly1.5px with SVG non-scaling-stroke; enlargement must not thicken lines.

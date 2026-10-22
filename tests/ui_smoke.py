@@ -82,7 +82,7 @@ with sync_playwright() as p:
  # Clear both fields and verify placeholders stay out of preview.
  page.locator('[data-open="type"]').click();page.locator('#quote-input').fill('');page.locator('#source-input').fill('')
  assert page.locator('#home .quote').inner_text()==''
- assert page.locator('#quote-input').evaluate('(el)=>getComputedStyle(el).color')=='rgb(196, 191, 186)'
+ assert page.locator('#quote-input').evaluate('(el)=>getComputedStyle(el).color')=='rgb(26, 25, 24)'
  assert page.locator('#quote-input').evaluate('(el)=>getComputedStyle(el, "::placeholder").color')=='rgb(196, 191, 186)'
  assert page.locator('#close-editor').count()==0
  assert page.locator('.ideas-label').count()==0
