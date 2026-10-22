@@ -363,6 +363,11 @@
     const settings = page === 'settings';
     $('#home').hidden = settings || detail;
     $('.header').hidden = settings || detail;
+    if (editor.hidden) {
+      document.body.classList.remove('editing','editing-type');
+      $('.header').style.visibility=''; $('.header').removeAttribute('aria-hidden');
+      $('.header').inert=false;
+    }
     $('#settings').hidden = !settings;
     $('#settings-detail').hidden = !detail;
     $$('.detail-panel').forEach(el => { el.hidden = el.id !== 'detail-' + page; });

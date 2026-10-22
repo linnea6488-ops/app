@@ -243,3 +243,8 @@ Use the user-supplied black-and-white 编组.svg as the Motivation home-screen i
 - Type explicitly hides header visually and from accessibility; switching away/closing restores it. Refresh icon increases28→30px.
 
 - Refresh icon remains30px but stroke is exactly1.5px with SVG non-scaling-stroke; enlargement must not thicken lines.
+
+## Type preview spacing and entry return (2026-10-22)
+- Normal Type sheet preview top is24px plus actual safe area, with exactly18px between wallpaper bottom and sheet top. Preview scales proportionally to the available vertical space, replacing the old fixed38% width. Highest editor still covers preview when entering text.
+- All three home entries remain plain1px-border actions on return, without black focus outline/selected border. Keyboard focus uses label underline.
+- Rendering a home route with editor closed clears stale header hiding/inert state, so refresh/menu return after editor/settings navigation. Refresh still30px with fixed1.5px stroke.

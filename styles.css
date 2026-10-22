@@ -37,3 +37,10 @@ body.editing #home{visibility:hidden}
 .menu{gap:6px}.menu span{width:24px;height:1.6px}.empty-state h2{margin-bottom:3px}.empty-state p{font-size:15px}.favorite-item{position:relative}.favorite-remove{position:absolute;right:10px;bottom:10px;padding:0;text-decoration:none}.favorite-remove[aria-pressed=true] svg path{fill:var(--ink)}
 #quote-input,#source-input{color:var(--ink)}#quote-input::placeholder,#source-input::placeholder{color:#C4BFBA}
 body.editing.editing-type .header{visibility:hidden}body.editing.editing-type .preview-backdrop{top:env(safe-area-inset-top);height:calc(41% - env(safe-area-inset-top))}
+
+/* Entries are actions, never visually selected after returning from the sheet. */
+.entry:focus,.entry:focus-visible{outline:none;box-shadow:none;border-color:var(--border)}.entry:focus-visible>span:last-child{text-decoration:underline;text-underline-offset:4px}.entry{-webkit-tap-highlight-color:transparent}
+body.editing.editing-type .preview-backdrop{top:calc(24px + env(safe-area-inset-top));height:calc(41% - 42px - env(safe-area-inset-top))}
+body.editing.editing-type .mini-preview{height:100%;width:auto;max-height:none;max-width:calc(100% - 48px);aspect-ratio:342/486}body.editing.editing-type .mini-preview .wallpaper{height:100%}
+
+body.editing.editing-type .preview-backdrop{padding:0}
