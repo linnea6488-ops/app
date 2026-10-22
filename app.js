@@ -94,23 +94,22 @@
     $('#quote-input').value = design.ideaId ? '' : design.quote;
     $('#source-input').value = design.sourceIsBuiltIn ? '' : design.source;
   }
-  function sizeTypePreview() {
-    if (editor.hidden || !document.body.classList.contains('editing-type')) return;
+  function sizeEditorPreview() {
+    if (editor.hidden) return;
     const top=24+parseFloat(getComputedStyle($('.app')).paddingTop);
     const availableHeight=Math.max(0,sheet.offsetTop-top-18);
     const width=Math.min(editor.clientWidth-48,availableHeight*342/486);
-    editor.style.setProperty('--type-preview-width',Math.max(0,width)+'px');
-    editor.style.setProperty('--type-preview-height',Math.max(0,width)*486/342+'px');
+    editor.style.setProperty('--editor-preview-width',Math.max(0,width)+'px');
+    editor.style.setProperty('--editor-preview-height',Math.max(0,width)*486/342+'px');
   }
-  new ResizeObserver(sizeTypePreview).observe(sheet);
-  new ResizeObserver(sizeTypePreview).observe(editor);
+  new ResizeObserver(sizeEditorPreview).observe(sheet);
+  new ResizeObserver(sizeEditorPreview).observe(editor);
   function changeTab(tab, focus = false) {
-    document.body.classList.toggle('editing-type',tab === 'type');
-    $('.header').style.visibility=tab === 'type' ? 'hidden' : '';
-    $('.header').setAttribute('aria-hidden',String(tab === 'type'));
+    $('.header').style.visibility='hidden';
+    $('.header').setAttribute('aria-hidden','true');
     $$('[data-tab]').forEach(el => { const active = el.dataset.tab === tab; el.setAttribute('aria-selected',String(active)); el.tabIndex = active ? 0 : -1; $('#panel-'+el.dataset.tab).hidden = !active; });
     $('#sheet-content').scrollTop = 0;
-    sizeTypePreview();
+    sizeEditorPreview();
     if (focus) $('#tab-'+tab).focus();
   }
   function setExpanded(value) { expanded=value; sheet.style.height=''; sheet.classList.toggle('expanded',value); $('#handle').setAttribute('aria-expanded',String(value)); $('#handle').setAttribute('aria-label',t(value ? 'Close editor and return home' : 'Expand editor')); }
@@ -150,7 +149,7 @@
     if (animate === false) { clearMotion(); finish(); } else transitionEditor(false,finish);
   }
   $$('[data-open]').forEach(el => el.addEventListener('click',() => {
-    returnFocus=el; syncFields(); changeTab(el.dataset.open); setExpanded(false); editor.hidden=false; sizeTypePreview();
+    returnFocus=el; syncFields(); changeTab(el.dataset.open); setExpanded(false); editor.hidden=false; sizeEditorPreview();
     document.body.classList.add('editing'); $('#home').inert=true; $('.header').inert=true; document.body.style.overflow='hidden';
     // Keep initial focus on the neutral dialog during the user gesture, not on a tab.
     // Intentional keyboard arrow navigation can still focus the tabs afterwards.

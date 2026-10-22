@@ -31,7 +31,7 @@ with sync_playwright() as p:
   for tab in ['image','type','ideas']:
    page.locator('[data-open="'+tab+'"]').tap();page.locator('#editor:not(.is-transitioning)').wait_for()
    mini=page.locator('#preview-close .wallpaper').bounding_box()
-   assert abs(mini['y']-(24 if tab=='type' else home['y']+4))<1,(width,tab,home,mini)
+   assert abs(mini['y']-24)<1,(width,tab,home,mini)
    if tab=='type':
     assert page.locator('#quote-input').get_attribute('placeholder')==page.locator('#source-input').get_attribute('placeholder')
     page.locator('#quote-input').dispatch_event('pointerdown',{'pointerType':'touch','bubbles':True})

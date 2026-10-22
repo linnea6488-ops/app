@@ -260,3 +260,6 @@ Use the user-supplied black-and-white 编组.svg as the Motivation home-screen i
 ## Softer loading sweep and sheet gestures (2026-10-22)
 - White shimmer peak opacity70→35%, black5% unchanged.
 - Drag downward from any part of sheet heading or tabs to dismiss, both normal and expanded. Sheet follows pointer, deliberate threshold dismisses fully; minor movement snaps back. Upward drag expands. Preserve ordinary tab taps and handle click/keyboard alternatives; content area retains native scrolling/text selection.
+
+## Shared editor preview geometry (2026-10-22)
+- All Image, Type and Ideas entries/tabs share the same editor geometry: hide app header, preview top24px+safe area and18px above the normal sheet; size from measured sheet position while preserving wallpaper ratio. Tab switching does not reveal header or jump preview. Dismissal restores header and home layout.

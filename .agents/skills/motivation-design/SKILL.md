@@ -70,3 +70,5 @@ Latest Type revision: actual entered Quote/Source use primary ink, placeholders 
 Latest custom-field correction overrides earlier hints: both untouched inputs show Add your custom text / quote in #C4BFBA; built-in wallpaper text is not prefilled in these fields. Actual custom values are black and retained on reopen. Refresh30px.
 
 Latest Type normal preview:24px+safe-area top and18px to sheet, proportional height. Home entries never use black outline/selected border; keyboard focus underlines text. Home routing clears stale header hiding.
+
+Latest: shared24px top/18px sheet-gap and hidden header apply to ALL three editor tabs, not only Type. Restore header on dismissal.

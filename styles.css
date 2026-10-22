@@ -36,17 +36,17 @@ body.editing #home{visibility:hidden}
 /* Larger header symbols, icon-only saved wallpaper actions, Type editing state. */
 .menu{gap:6px}.menu span{width:24px;height:1.6px}.empty-state h2{margin-bottom:3px}.empty-state p{font-size:15px}.favorite-item{position:relative}.favorite-remove{position:absolute;right:10px;bottom:10px;padding:0;text-decoration:none}.favorite-remove[aria-pressed=true] svg path{fill:var(--ink)}
 #quote-input,#source-input{color:var(--ink)}#quote-input::placeholder,#source-input::placeholder{color:#C4BFBA}
-body.editing.editing-type .header{visibility:hidden}body.editing.editing-type .preview-backdrop{top:env(safe-area-inset-top);height:calc(41% - env(safe-area-inset-top))}
+body.editing .header{visibility:hidden}body.editing .preview-backdrop{top:env(safe-area-inset-top);height:calc(41% - env(safe-area-inset-top))}
 
 /* Entries are actions, never visually selected after returning from the sheet. */
 .entry:focus,.entry:focus-visible{outline:none;box-shadow:none;border-color:var(--border)}.entry:focus-visible>span:last-child{text-decoration:underline;text-underline-offset:4px}.entry{-webkit-tap-highlight-color:transparent}
-body.editing.editing-type .preview-backdrop{top:calc(24px + env(safe-area-inset-top));height:calc(41% - 42px - env(safe-area-inset-top))}
-body.editing.editing-type .mini-preview{height:100%;width:auto;max-height:none;max-width:calc(100% - 48px);aspect-ratio:342/486}body.editing.editing-type .mini-preview .wallpaper{height:100%}
+body.editing .preview-backdrop{top:calc(24px + env(safe-area-inset-top));height:calc(41% - 42px - env(safe-area-inset-top))}
+body.editing .mini-preview{height:100%;width:auto;max-height:none;max-width:calc(100% - 48px);aspect-ratio:342/486}body.editing .mini-preview .wallpaper{height:100%}
 
-body.editing.editing-type .preview-backdrop{padding:0}
+body.editing .preview-backdrop{padding:0}
 
 /* Size from the sheet’s measured position, preserving the full wallpaper ratio. */
-body.editing.editing-type .preview-backdrop{height:var(--type-preview-height,0px)}body.editing.editing-type .mini-preview{width:var(--type-preview-width,0px);height:var(--type-preview-height,0px);max-width:none;flex:none}
+body.editing .preview-backdrop{height:var(--editor-preview-height,0px)}body.editing .mini-preview{width:var(--editor-preview-width,0px);height:var(--editor-preview-height,0px);max-width:none;flex:none}
 
 /* Background loading: 5% black skeleton with a white sweep. */
 .entry-art{position:relative;overflow:hidden;border-radius:4px}.wallpaper.image-loading,.image-option.image-loading,.entry-art.image-loading{background:rgba(0,0,0,.05)}.image-loading>.wallpaper-image,.image-loading>img{opacity:0}.image-loading::after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(105deg,transparent 25%,rgba(255,255,255,.35) 50%,transparent 75%);transform:translateX(-100%);animation:background-sweep 1.4s ease-in-out infinite}.wallpaper.image-loading .wallpaper-copy{z-index:1}@keyframes background-sweep{to{transform:translateX(100%)}}@media(prefers-reduced-motion:reduce){.image-loading::after{animation:none;transform:none;opacity:.35}}
