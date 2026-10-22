@@ -55,16 +55,33 @@
     $('#text-limit').hidden = false;
     toast('Text limit reached. Remove some text to continue.');
   }
+  const watchedImages = new WeakSet();
+  function updateImageLoading(image) {
+    image.parentElement?.classList.toggle('image-loading', !image.complete);
+  }
+  function watchBackground(image) {
+    if (!watchedImages.has(image)) {
+      watchedImages.add(image);
+      image.addEventListener('load', () => updateImageLoading(image));
+      image.addEventListener('error', () => image.parentElement?.classList.remove('image-loading'));
+    }
+    updateImageLoading(image);
+  }
+  function setBackgroundImage(image, src) {
+    if (image.getAttribute('src') !== src) image.src=src;
+    watchBackground(image);
+  }
+  $$('.image-option img, .wallpaper-image, #entry-image').forEach(watchBackground);
   function paint(wallpaper, value) {
     const image = wallpaper.querySelector('.wallpaper-image');
-    if (image.getAttribute('src') !== backgrounds[value.background]) image.src = backgrounds[value.background];
+    setBackgroundImage(image, backgrounds[value.background]);
     wallpaper.querySelector('.quote').textContent = value.quote;
     wallpaper.querySelector('.source').textContent = value.source;
     wallpaper.querySelector('.wallpaper-copy').style.textAlign = value.align;
   }
   function render() {
     $$('#home .wallpaper, #preview-close .wallpaper').forEach(el => paint(el, design));
-    $('#entry-image').src = backgrounds[design.background];
+    setBackgroundImage($('#entry-image'), backgrounds[design.background]);
     $('#favorites-count').textContent = favorites.length;
     const isFavorite = favorites.some(d => signature(d) === signature(design));
     $('#favorite').setAttribute('aria-pressed', String(isFavorite));
@@ -114,7 +131,7 @@
     if (!full.width || !small.width) { done(); return; }
     const clone=home.cloneNode(true); clone.classList.add('transition-wallpaper'); clone.setAttribute('aria-hidden','true'); clone.inert=true;
     Object.assign(clone.style,{left:full.left+'px',top:full.top+'px',width:full.width+'px',height:full.height+'px'});
-    editor.append(clone); motionClone=clone; mini.style.visibility='hidden'; editor.classList.add('is-transitioning');
+    editor.append(clone); watchBackground(clone.querySelector('img')); motionClone=clone; mini.style.visibility='hidden'; editor.classList.add('is-transitioning');
     const miniature='translate('+(small.left-full.left)+'px,'+(small.top-full.top)+'px) scale('+(small.width/full.width)+')';
     const options={duration:360,easing:'cubic-bezier(0.22,1,0.36,1)',fill:'both'};
     activeAnimations=[

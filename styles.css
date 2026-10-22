@@ -47,3 +47,6 @@ body.editing.editing-type .preview-backdrop{padding:0}
 
 /* Size from the sheet’s measured position, preserving the full wallpaper ratio. */
 body.editing.editing-type .preview-backdrop{height:var(--type-preview-height,0px)}body.editing.editing-type .mini-preview{width:var(--type-preview-width,0px);height:var(--type-preview-height,0px);max-width:none;flex:none}
+
+/* Background loading: 5% black skeleton with a white sweep. */
+.entry-art{position:relative;overflow:hidden;border-radius:4px}.wallpaper.image-loading,.image-option.image-loading,.entry-art.image-loading{background:rgba(0,0,0,.05)}.image-loading>.wallpaper-image,.image-loading>img{opacity:0}.image-loading::after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(105deg,transparent 25%,rgba(255,255,255,.7) 50%,transparent 75%);transform:translateX(-100%);animation:background-sweep 1.4s ease-in-out infinite}.wallpaper.image-loading .wallpaper-copy{z-index:1}@keyframes background-sweep{to{transform:translateX(100%)}}@media(prefers-reduced-motion:reduce){.image-loading::after{animation:none;transform:none;opacity:.35}}

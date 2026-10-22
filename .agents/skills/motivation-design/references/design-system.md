@@ -251,3 +251,6 @@ Use the user-supplied black-and-white 编组.svg as the Motivation home-screen i
 
 ## Type preview follows sheet geometry (2026-10-22)
 - Do not calculate preview size from a fixed41% viewport region. Measure actual sheet offsetTop and available width; top24px+safe area and bottom18px define maximum proportional wallpaper size. ResizeObserver follows sheet/viewport resizing and dragging. Width and height both change together; never stretch artwork. At the highest input position no preview space remains.
+
+## Background loading state (2026-10-22)
+- Background images show rgba(0,0,0,.05) skeleton with a white sweeping gradient while loading. Apply to home/mini/saved wallpapers, gallery thumbnails and entry thumbnail. Stop on load/error; cached complete images do not force an artificial delay. Reduced motion uses static highlight. Skeleton is visual only and does not intercept actions or alter layout.
