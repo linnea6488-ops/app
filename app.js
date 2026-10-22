@@ -73,9 +73,14 @@
     $$('[data-align]').forEach(el => el.setAttribute('aria-pressed',String(el.dataset.align === design.align)));
     $$('.idea').forEach(el => el.setAttribute('aria-pressed',String(el.dataset.quote === design.quote && el.dataset.source === design.source)));
   }
-  function syncFields() { $('#quote-input').value = design.quote; $('#source-input').value = design.source; }
+  function syncFields() {
+    $('#quote-input').value = design.ideaId ? '' : design.quote;
+    $('#source-input').value = design.sourceIsBuiltIn ? '' : design.source;
+  }
   function changeTab(tab, focus = false) {
     document.body.classList.toggle('editing-type',tab === 'type');
+    $('.header').style.visibility=tab === 'type' ? 'hidden' : '';
+    $('.header').setAttribute('aria-hidden',String(tab === 'type'));
     $$('[data-tab]').forEach(el => { const active = el.dataset.tab === tab; el.setAttribute('aria-selected',String(active)); el.tabIndex = active ? 0 : -1; $('#panel-'+el.dataset.tab).hidden = !active; });
     $('#sheet-content').scrollTop = 0;
     if (focus) $('#tab-'+tab).focus();
@@ -113,7 +118,7 @@
   function close(animate = true) {
     if (editor.hidden) return;
     if (editor.contains(document.activeElement)) document.activeElement.blur();
-    const finish=() => { editor.hidden=true; document.body.classList.remove('editing','editing-type'); $('#home').inert=false; $('.header').inert=false; document.body.style.overflow=''; persist(); returnFocus?.focus(); };
+    const finish=() => { editor.hidden=true; document.body.classList.remove('editing','editing-type'); $('.header').style.visibility=''; $('.header').removeAttribute('aria-hidden'); $('#home').inert=false; $('.header').inert=false; document.body.style.overflow=''; persist(); returnFocus?.focus(); };
     if (animate === false) { clearMotion(); finish(); } else transitionEditor(false,finish);
   }
   $$('[data-open]').forEach(el => el.addEventListener('click',() => {
@@ -176,10 +181,8 @@
     $('#text-limit').hidden = accepted === candidate;
     if (accepted !== candidate) showTextLimit();
     if (accepted !== candidate) { const cursor = field.selectionStart; field.value = accepted; field.setSelectionRange(Math.min(cursor,accepted.length),Math.min(cursor,accepted.length)); }
-    if (accepted !== design[property]) {
-      if (property==='quote') delete design.ideaId;
-      if (property==='source') design.sourceIsBuiltIn=false;
-    }
+    if (property==='quote') delete design.ideaId;
+    if (property==='source') design.sourceIsBuiltIn=false;
     design[property]=accepted; render(); clearTimeout(saveTimer); saveTimer=setTimeout(persist,200);
   }
   [['quote','quote-input'],['source','source-input']].forEach(([property,id]) => {

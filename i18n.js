@@ -21,6 +21,7 @@ window.MotivationI18n = {
     "日本語"
   ],
   "messages": {
+    "Add your custom text / quote": ["加入你的自訂文字／引言", "Ajoutez votre texte / citation", "Eigenen Text / ein Zitat hinzufügen", "Aggiungi il tuo testo / una citazione", "Voeg je eigen tekst / citaat toe", "나만의 글 / 인용문을 입력하세요", "自分のテキスト／引用を追加"],
     "Refresh inspiration": ["更換靈感", "Renouveler l’inspiration", "Inspiration erneuern", "Rinnova l’ispirazione", "Inspiratie vernieuwen", "영감 새로고침", "インスピレーションを更新"],
     "Settings": [
       "設定",

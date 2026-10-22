@@ -9,10 +9,10 @@ with sync_playwright() as p:
  page.locator('.idea').first.click()
  assert page.locator('#home .quote').text_content()=='Home is made in the ways we care.'
  page.locator('#tab-type').click()
- assert page.locator('#quote-input').input_value()=='Home is made in the ways we care.'
+ assert page.locator('#quote-input').input_value()==''
  assert '\n' not in page.locator('#quote-input').input_value()
- assert page.locator('#source-input').input_value()=='AI original'
- assert page.locator('#source-input').get_attribute('placeholder')=='Enter an author or source…'
+ assert page.locator('#source-input').input_value()==''
+ assert page.locator('#source-input').get_attribute('placeholder')=='Add your custom text / quote'
  assert page.locator('#source-input').evaluate('(el)=>getComputedStyle(el,"::placeholder").color')=='rgb(196, 191, 186)'
  page.screenshot(path='/tmp/motivation-review/type-placeholder.png')
  page.locator('#source-input').fill('My source')

@@ -66,3 +66,5 @@ Latest layout: omit background helper copy, keep mini-preview top aligned to the
 Latest corrections: remove Share, retain bottom-right bookmark, refresh both idea/artwork from header, restore built-in localized attribution. Supplied PNG is exclusively the Favorites empty-state illustration; title/subtitle gap6px.
 
 Latest Type revision: actual entered Quote/Source use primary ink, placeholders stay light. Hide header and raise mini preview while Type is selected. Favorites empty title/subtitle gap3px and subtitle15px; remove via bookmark overlay, not text. Header refresh28px and menu strokes24px.
+
+Latest custom-field correction overrides earlier hints: both untouched inputs show Add your custom text / quote in #C4BFBA; built-in wallpaper text is not prefilled in these fields. Actual custom values are black and retained on reopen. Refresh30px.
