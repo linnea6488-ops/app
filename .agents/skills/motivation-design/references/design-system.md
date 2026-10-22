@@ -254,3 +254,5 @@ Use the user-supplied black-and-white 编组.svg as the Motivation home-screen i
 
 ## Background loading state (2026-10-22)
 - Background images show rgba(0,0,0,.05) skeleton with a white sweeping gradient while loading. Apply to home/mini/saved wallpapers, gallery thumbnails and entry thumbnail. Stop on load/error; cached complete images do not force an artificial delay. Reduced motion uses static highlight. Skeleton is visual only and does not intercept actions or alter layout.
+
+- Home-only geometry update: title-to-artwork gap8→4px; home wallpaper height grows4px above its previous342:486-based height. Its bottom,18px entry gap and entry positions stay unchanged. Editor/thumbnail dimensions are unchanged.

@@ -24,14 +24,14 @@ with sync_playwright() as p:
  assert page.get_by_text('Choose a background for your words.',exact=True).count()==0
  for width in [320,375,390,430]:
   page.set_viewport_size({'width':width,'height':844})
-  assert page.locator('.header').evaluate('(el)=>getComputedStyle(el).marginBottom')=='8px'
+  assert page.locator('.header').evaluate('(el)=>getComputedStyle(el).marginBottom')=='4px'
   home=page.locator('#home .wallpaper').bounding_box()
   entries=page.locator('.entries').bounding_box()
   assert abs(entries['y']-(home['y']+home['height'])-18)<1
   for tab in ['image','type','ideas']:
    page.locator('[data-open="'+tab+'"]').tap();page.locator('#editor:not(.is-transitioning)').wait_for()
    mini=page.locator('#preview-close .wallpaper').bounding_box()
-   assert abs(mini['y']-(24 if tab=='type' else home['y']))<1,(width,tab,home,mini)
+   assert abs(mini['y']-(24 if tab=='type' else home['y']+4))<1,(width,tab,home,mini)
    if tab=='type':
     assert page.locator('#quote-input').get_attribute('placeholder')==page.locator('#source-input').get_attribute('placeholder')
     page.locator('#quote-input').dispatch_event('pointerdown',{'pointerType':'touch','bubbles':True})
