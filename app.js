@@ -421,6 +421,10 @@
   });
   function viewport() { if (window.visualViewport) { editor.style.setProperty('--editor-height',window.visualViewport.height+'px'); editor.style.top=window.visualViewport.offsetTop+'px'; } }
   window.visualViewport?.addEventListener('resize',viewport); window.visualViewport?.addEventListener('scroll',viewport); viewport();
+  // Start expanding on touch-down, before Safari opens its software keyboard.
+  editor.addEventListener('pointerdown',event => {
+    if (event.target.matches('#quote-input,#source-input') && !editor.hidden) setExpanded(true);
+  },true);
   document.addEventListener('focusin',event => {
     if (event.target.matches('#quote-input,#source-input') && !editor.hidden) setExpanded(true);
     if (event.target.matches('textarea')) setTimeout(() => {

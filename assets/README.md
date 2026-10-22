@@ -32,3 +32,13 @@ Files are byte-for-byte copies of the uploads, without cropping or recoloring:
 are browser rasterizations of that complete canvas, without recropping, recoloring
 or added rounded corners. iOS applies its own icon mask. Rebuild with
 `python3 scripts/render_app_icons.py` in the prepared development environment.
+
+## Nine additional rich-color backgrounds
+
+`rich-*.jpg` are nine AI-generated artworks made for this app on 2026-10-22.
+Each is 1024×1536 with a different dark palette/composition. See
+`generated-backgrounds.json` for titles and original generation filenames.
+Original PNGs are retained in the workspace’s generated_images directory. The
+served JPEGs are same-size browser encodings (quality 85), without cropping,
+recoloring or content changes. The nine served files total about 1.8 MB.
+`prepare_backgrounds.py` accepts a JSON array of {name, path} original PNG sources.

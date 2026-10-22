@@ -956,6 +956,87 @@ window.MotivationI18n = {
       "Ingebouwde teksten volgen deze taal. Je eigen woorden blijven ongewijzigd.",
       "내장 문구는 선택한 언어로 바뀌며 직접 쓴 글은 유지됩니다.",
       "内蔵の文面は選んだ言語に切り替わります。自分で書いた言葉は変わりません。"
+    ],
+    "Burgundy vineyard": [
+      "酒紅葡萄園",
+      "Vignoble bordeaux",
+      "Burgunderroter Weinberg",
+      "Vigneto bordeaux",
+      "Bordeauxrode wijngaard",
+      "버건디 포도밭",
+      "ワイン色の葡萄畑"
+    ],
+    "Indigo coast": [
+      "靛藍海岸",
+      "Côte indigo",
+      "Indigoküste",
+      "Costa indaco",
+      "Indigokust",
+      "남빛 해안",
+      "藍色の海岸"
+    ],
+    "Emerald woodland": [
+      "祖母綠森林",
+      "Forêt émeraude",
+      "Smaragdwald",
+      "Bosco smeraldo",
+      "Smaragdbos",
+      "에메랄드 숲",
+      "エメラルドの森"
+    ],
+    "Copper canyon": [
+      "銅棕峽谷",
+      "Canyon cuivré",
+      "Kupferschlucht",
+      "Canyon ramato",
+      "Koperkleurige kloof",
+      "구릿빛 협곡",
+      "銅色の峡谷"
+    ],
+    "Violet still life": [
+      "紫羅蘭靜物",
+      "Nature morte violette",
+      "Violettes Stillleben",
+      "Natura morta viola",
+      "Violet stilleven",
+      "보랏빛 정물",
+      "紫の静物画"
+    ],
+    "Golden autumn": [
+      "金色深秋",
+      "Automne doré",
+      "Goldener Herbst",
+      "Autunno dorato",
+      "Gouden herfst",
+      "황금빛 가을",
+      "黄金の秋"
+    ],
+    "Teal lagoon": [
+      "深青潟湖",
+      "Lagune bleu-vert",
+      "Petrolfarbene Lagune",
+      "Laguna verde petrolio",
+      "Petrolkleurige lagune",
+      "청록 석호",
+      "深い青緑の潟"
+    ],
+    "Slate lighthouse": [
+      "岩灰燈塔",
+      "Phare ardoise",
+      "Schiefergrauer Leuchtturm",
+      "Faro grigio ardesia",
+      "Leigrijze vuurtoren",
+      "청회색 등대",
+      "青灰色の灯台"
+    ],
+    "Rose rooftops": [
+      "玫瑰暮色屋頂",
+      "Toits au crépuscule rose",
+      "Dächer im Rosenrot",
+      "Tetti al tramonto rosato",
+      "Daken in rozenlicht",
+      "장밋빛 지붕",
+      "薔薇色の屋根"
     ]
   }
 };

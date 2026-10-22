@@ -27,3 +27,5 @@ body.editing #home{visibility:hidden}
 .idea-column{display:flex;flex-direction:column;gap:10px;min-width:0}.idea-column .idea{width:100%;flex-shrink:0}#source-input,#source-input::placeholder{color:#C4BFBA}.tabs button:focus,.tabs button:focus-visible{outline:0;box-shadow:none}.tabs button:focus-visible{text-decoration:underline;text-underline-offset:6px}.tabs button{-webkit-tap-highlight-color:transparent}
 
 .editor:focus,.editor:focus-visible{outline:none;box-shadow:none}
+
+.entries{margin-top:9px}.preview-backdrop{align-items:flex-start}

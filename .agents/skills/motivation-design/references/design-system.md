@@ -214,3 +214,13 @@ Initial editor entry must not programmatically focus Image/Type/Ideas after the 
 ## Confirmed home-screen identity (2026-10-22)
 
 Use the user-supplied black-and-white 编组.svg as the Motivation home-screen icon. Preserve the complete 512×512 square, black background, shapes and internal whitespace. Supply a 180px Apple touch PNG and 192/512px manifest PNGs rendered from the unmodified SVG; let the OS apply corner masking. Home-screen title is Motivation, with standalone launch and the existing ivory app theme. This adds install metadata only, not offline behavior or a new in-app installation flow.
+
+
+## Six requested gallery/layout adjustments (2026-10-22)
+
+- Remove the background-panel helper sentence entirely.
+- Add nine AI-generated rich dark artworks with distinct palettes, retaining the 12 supplied backgrounds and their indices. New entries: burgundy vineyard, indigo coast, emerald woodland, copper canyon, violet still life, golden autumn, teal lagoon, slate lighthouse and rose rooftops. Use same-size JPEG encodings for mobile delivery; do not alter the original generation files.
+- The user explicitly confirmed that Quote and Source placeholders must be exactly the same text: “Enter an author or source…”, localized identically in all eight languages. Do not clear current quote values merely to expose a placeholder. This supersedes the prior separate Quote hint.
+- Begin expansion on Quote/Source pointer-down, before Safari opens the keyboard; retain focus-based expansion for keyboard/assistive input.
+- Align the top edge of the mini wallpaper with the top edge of the main wallpaper at rest, with no extra centering offset. Preserve the existing shrinking-card transition.
+- Halve the gap between wallpaper and the three home entry cards from 18px to 9px. The gap between entry cards and Save stays unchanged.

@@ -232,3 +232,15 @@
 - 已验证 /app/ 子路径（对应GitHub Pages项目路径）下manifest解析无错误，所有图标URL返回200且PNG尺寸正确，iOS元数据正确，编辑入口正常。尚未在真实iPhone主屏幕安装验证。
 - 不包含离线缓存/Service Worker，不宣称离线支持。桌面添加由用户在Safari分享菜单手动完成。
 - 本节取代此前“PWA配置待图标附件”的状态；这次将完整配置与图标一起提交推送。
+
+## 六项图库与布局调整（2026-10-22）
+
+- 移除Choose a background…说明。
+- 实际生成并加入9张不同浓郁色调背景，保留原12张，共21张。新图索引12–20，原收藏索引不变。九图均为1024×1536；同尺寸JPEG总约1.8MB，原PNG保留在generated_images，生成来源记录assets/generated-backgrounds.json。
+- 用户已明确第三项是Quote提示语与Source完全相同，统一Enter an author or source…及其八语翻译，不清空已有文案。
+- 输入框pointerdown捕获阶段即最高展开，保留focusin兜底。
+- 缩小壁纸改为顶部对齐，去掉原垂直居中造成的额外上方空白。
+- 首页壁纸与三入口间距从18变9，入口与Save间距不变。
+- 新增tests/mobile_layout_smoke.py验证21图、9张新图真实加载、320/375/390/430下预览顶部一致、9px间距、提示语一致、触屏展开。具体测试结果以完成输出为准。
+
+- mobile_layout_smoke 已全部通过；更新前ui_smoke也通过。新增图已实际逐一选择并加载，不是占位图；原上传文件与主屏幕图标均未改动。

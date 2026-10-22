@@ -45,7 +45,7 @@ The latest explicit user instructions take precedence. If requirements change, u
 - Amiri for brand, quote and literary labels; system sans for fields and operational copy.
 - Reference width 390 px with 24 px gutters; 16 px gutters may be used at narrow widths.
 - Main Save button 56 px high; circular actions 44 px; component radius 4 px.
-- Empty Quote: “Please enter what you want to describe.” (placeholder and entered quote text #C4BFBA); empty Source: “Enter an author or source…” (#C4BFBA, no prefilled AI attribution).
+- Empty Quote: “Enter an author or source…” (identical to Source by explicit user confirmation) (placeholder and entered quote text #C4BFBA); empty Source: “Enter an author or source…” (#C4BFBA, no prefilled AI attribution).
 - Selected dark thumbnails need a clear outline/check; dark artwork needs readable light quote and source text.
 - English toasts must describe an operation that actually happened. A toast alone does not implement save, share, feedback or AI generation.
 
@@ -60,3 +60,5 @@ Latest user direction: top, borderless toasts; opening editor entries scales the
 Built-in ideas follow all eight selected languages throughout home, preview and Type. Preserve custom text verbatim. Use stable built-in IDs, natural wrapping without injected newlines, 10px independent-column idea spacing, and no rectangular tab focus outline.
 
 Quote/Source focus must fully expand the editor. A deliberate downward handle dismissal from the expanded state closes completely, as does clicking the expanded handle; do not stop at the intermediate height. Release input focus on dismissal.
+
+Latest layout: omit background helper copy, keep mini-preview top aligned to the main card, use a 9px wallpaper-to-entry gap, and expand on input pointer-down as well as focus. Gallery now has 12 supplied images plus nine explicitly requested AI-generated rich-color backgrounds.

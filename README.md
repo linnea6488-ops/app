@@ -25,7 +25,7 @@ actual fixed-size layout, including pasted text and IME composition. Live AI gen
 and image export/share are not implemented.
 Their controls do not report successful operations. Export ratio remains deferred.
 The demo includes 12 AI-written original English quotes and 12 user-supplied dark
-backgrounds. The quote copy is pre-generated built-in content; no live AI endpoint is called.
+backgrounds plus nine AI-generated rich-color artworks. The quote copy is pre-generated built-in content; no live AI endpoint is called.
 
 ## Review and validation
 
@@ -41,6 +41,7 @@ python3 tests/ui_smoke.py
 python3 tests/settings_limits_smoke.py
 python3 tests/fresh_home_smoke.py
 python3 tests/ideas_layout_smoke.py
+python3 tests/mobile_layout_smoke.py
 ```
 
 This checks actual browser rendering, responsive overflow, editing, local state,

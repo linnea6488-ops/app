@@ -13,7 +13,7 @@ with sync_playwright() as p:
   page.set_viewport_size({'width':width,'height':844})
   assert page.evaluate('document.documentElement.scrollWidth <= innerWidth'),width
   page.get_by_role('button',name='Typography',exact=True).click()
-  assert page.locator('#quote-input').get_attribute('placeholder')=='Please enter what you want to describe.'
+  assert page.locator('#quote-input').get_attribute('placeholder')=='Enter an author or source…'
   assert page.evaluate('document.documentElement.scrollWidth <= innerWidth'),width
   page.get_by_role('button',name='Close editor and return home',exact=True).click()
  page.set_viewport_size({'width':390,'height':844})

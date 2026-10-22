@@ -1,0 +1,83 @@
+[
+  {
+    "name": "wine",
+    "title": "Burgundy vineyard",
+    "asset": "rich-wine.jpg",
+    "source_generation": "exec-cf10cd1c-04fe-4526-847c-e760b4d78c8b.png",
+    "generated_on": "2026-10-22",
+    "width": 1024,
+    "height": 1536
+  },
+  {
+    "name": "indigo",
+    "title": "Indigo coast",
+    "asset": "rich-indigo.jpg",
+    "source_generation": "exec-944569e4-8a3e-4605-b1f9-2603b71b063a.png",
+    "generated_on": "2026-10-22",
+    "width": 1024,
+    "height": 1536
+  },
+  {
+    "name": "emerald",
+    "title": "Emerald woodland",
+    "asset": "rich-emerald.jpg",
+    "source_generation": "exec-04f14e9c-121e-4755-b2cb-93611799ba99.png",
+    "generated_on": "2026-10-22",
+    "width": 1024,
+    "height": 1536
+  },
+  {
+    "name": "umber",
+    "title": "Copper canyon",
+    "asset": "rich-umber.jpg",
+    "source_generation": "exec-4c0ed1b7-ab6a-4c92-a6c8-6151adc2c8b4.png",
+    "generated_on": "2026-10-22",
+    "width": 1024,
+    "height": 1536
+  },
+  {
+    "name": "plum",
+    "title": "Violet still life",
+    "asset": "rich-plum.jpg",
+    "source_generation": "exec-4f7448b9-c56a-477e-9c84-d155e21de9f5.png",
+    "generated_on": "2026-10-22",
+    "width": 1024,
+    "height": 1536
+  },
+  {
+    "name": "ochre",
+    "title": "Golden autumn",
+    "asset": "rich-ochre.jpg",
+    "source_generation": "exec-e3f2662f-6f53-49dd-bc81-0c124410fcbc.png",
+    "generated_on": "2026-10-22",
+    "width": 1024,
+    "height": 1536
+  },
+  {
+    "name": "teal",
+    "title": "Teal lagoon",
+    "asset": "rich-teal.jpg",
+    "source_generation": "exec-c49bed5d-7a77-4189-9028-be6d6d4b3e02.png",
+    "generated_on": "2026-10-22",
+    "width": 1024,
+    "height": 1536
+  },
+  {
+    "name": "slate",
+    "title": "Slate lighthouse",
+    "asset": "rich-slate.jpg",
+    "source_generation": "exec-6b686c30-db84-4340-828b-353f5dfd81a9.png",
+    "generated_on": "2026-10-22",
+    "width": 1024,
+    "height": 1536
+  },
+  {
+    "name": "rose",
+    "title": "Rose rooftops",
+    "asset": "rich-rose.jpg",
+    "source_generation": "exec-10682103-5df3-4158-be2c-4f80bd0e903a.png",
+    "generated_on": "2026-10-22",
+    "width": 1024,
+    "height": 1536
+  }
+]
